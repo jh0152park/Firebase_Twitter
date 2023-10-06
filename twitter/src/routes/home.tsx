@@ -1,17 +1,20 @@
 import {
     AbsoluteCenter,
     Box,
+    Button,
     Divider,
     HStack,
     Heading,
     Image,
     Text,
     VStack,
+    useDisclosure,
 } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import styled from "styled-components";
+import CreateAccount from "./create_account";
 
 const Hightlighter = styled.span`
     color: "#61b1fd";
@@ -55,6 +58,8 @@ const footer = [
 ];
 
 export default function Home() {
+    const createAccount = useDisclosure();
+
     return (
         <>
             <Helmet>
@@ -123,7 +128,7 @@ export default function Home() {
                             <Divider></Divider>
                         </HStack>
 
-                        <Box
+                        <Button
                             w="35%"
                             h="45px"
                             bgColor={"twitter.500"}
@@ -131,11 +136,13 @@ export default function Home() {
                             display={"flex"}
                             justifyContent={"center"}
                             alignItems={"center"}
+                            _hover={{ bgColor: "twitter.600" }}
+                            onClick={createAccount.onOpen}
                         >
                             <Text fontWeight={"bold"} color={"white"}>
                                 계정 만들기
                             </Text>
-                        </Box>
+                        </Button>
 
                         <Box w="35%" fontSize={"12.1px"} opacity={"0.6"}>
                             <span>
@@ -201,6 +208,11 @@ export default function Home() {
                         <FooterStyle key={index}>{str}</FooterStyle>
                     ))}
                 </HStack>
+
+                <CreateAccount
+                    isOpen={createAccount.isOpen}
+                    onClose={createAccount.onClose}
+                ></CreateAccount>
             </Box>
         </>
     );
