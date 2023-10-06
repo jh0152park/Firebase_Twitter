@@ -15,6 +15,7 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 
 interface IModalForm {
@@ -60,6 +61,9 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
 
     return (
         <>
+            {/* <Helmet>
+                <title>Sign up for X</title>
+            </Helmet> */}
             <Modal isOpen={isOpen} onClose={onClose} isCentered size={"xl"}>
                 <ModalOverlay bgColor={"rgba(27, 34, 41, 0.8)"}></ModalOverlay>
                 <ModalContent bgColor={"black"} minH={"600px"}>

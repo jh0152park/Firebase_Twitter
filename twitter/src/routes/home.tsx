@@ -67,9 +67,15 @@ export default function Home() {
             </Helmet>
             <Box w="100%" h="100vh" position={"relative"}>
                 <HStack pt="200px">
-                    <Box w="50%" pl={20}>
+                    <Box
+                        w="50%"
+                        pl={"200px"}
+                        minWidth={"320px"}
+                        minHeight={"300px"}
+                    >
                         <Image
-                            src="https://static.toiimg.com/thumb/msid-102075304,width-1280,height-720,resizemode-4/.jpg"
+                            // src="https://static.toiimg.com/thumb/msid-102075304,width-1280,height-720,resizemode-4/.jpg"
+                            src="https://user-images.githubusercontent.com/118165975/273274005-628987c8-01e9-4c77-98b6-c22d7f938459.png"
                             objectFit={"cover"}
                         />
                     </Box>
@@ -88,8 +94,8 @@ export default function Home() {
                         </Heading>
 
                         <Box
-                            w="35%"
-                            h="45px"
+                            w="300px"
+                            h="40px"
                             mb={2}
                             bgColor={"white"}
                             borderRadius="50px"
@@ -106,8 +112,8 @@ export default function Home() {
                         </Box>
 
                         <Box
-                            w="35%"
-                            h="45px"
+                            w="300px"
+                            h="40px"
                             bgColor={"white"}
                             borderRadius="50px"
                             display={"flex"}
@@ -122,15 +128,15 @@ export default function Home() {
                             </HStack>
                         </Box>
 
-                        <HStack w="35%" my={2}>
+                        <HStack w="300px" my={2}>
                             <Divider></Divider>
                             <Text as={"b"}>or</Text>
                             <Divider></Divider>
                         </HStack>
 
                         <Button
-                            w="35%"
-                            h="45px"
+                            w="300px"
+                            h="40px"
                             bgColor={"twitter.500"}
                             borderRadius="50px"
                             display={"flex"}
@@ -144,7 +150,7 @@ export default function Home() {
                             </Text>
                         </Button>
 
-                        <Box w="35%" fontSize={"12.1px"} opacity={"0.6"}>
+                        <Box w="300px" fontSize={"12.1px"} opacity={"0.6"}>
                             <span>
                                 가입하시려면{" "}
                                 <Hightlighter
@@ -182,8 +188,8 @@ export default function Home() {
                         </Heading>
 
                         <Box
-                            w="35%"
-                            h="45px"
+                            w="300px"
+                            h="40px"
                             color={"whitesmoke"}
                             border="1px"
                             borderRadius="50px"
