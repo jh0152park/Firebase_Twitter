@@ -4,9 +4,8 @@ import Home from "./routes/home";
 import Profile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create_account";
-
-// twitter blue verification user
-// https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/1024px-Twitter_Verified_Badge.svg.png
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/loading-screen";
 
 const router = createBrowserRouter([
     {
@@ -34,9 +33,23 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function init() {
+        setIsLoading(false);
+    }
+
+    useEffect(() => {
+        init();
+    }, []);
+
     return (
         <>
-            <RouterProvider router={router}></RouterProvider>
+            {isLoading ? (
+                <LoadingScreen />
+            ) : (
+                <RouterProvider router={router}></RouterProvider>
+            )}
         </>
     );
 }
