@@ -6,6 +6,7 @@ import Login from "./routes/login";
 import CreateAccount from "./routes/create_account";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/loading-screen";
+import { auth } from "./firebase";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
 
     async function init() {
+        await auth.authStateReady();
         setIsLoading(false);
     }
 
