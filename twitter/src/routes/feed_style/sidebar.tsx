@@ -6,6 +6,7 @@ import SearchButton from "./sidebar_style/search_button";
 import NoticeButton from "./sidebar_style/notice_button";
 import MessageButton from "./sidebar_style/message_button";
 import ListButton from "./sidebar_style/list_button";
+import BookmarkButton from "./sidebar_style/bookmark_button";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function Sidebar() {
             <NoticeButton />
             <MessageButton />
             <ListButton />
+            <BookmarkButton />
         </VStack>
     );
 }
