@@ -15,6 +15,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import styled from "styled-components";
 import CreateAccount from "./create_account";
+import { useNavigate } from "react-router-dom";
+import LoginAccount from "./login";
 
 const Hightlighter = styled.span`
     color: "#61b1fd";
@@ -59,6 +61,7 @@ const footer = [
 
 export default function Home() {
     const createAccount = useDisclosure();
+    const loginAccount = useDisclosure();
 
     return (
         <>
@@ -187,20 +190,23 @@ export default function Home() {
                             이미 트위터에 가입하셨나요?
                         </Heading>
 
-                        <Box
+                        <Button
                             w="300px"
                             h="40px"
+                            colorScheme="none"
                             color={"whitesmoke"}
                             border="1px"
                             borderRadius="50px"
                             display={"flex"}
                             justifyContent={"center"}
                             alignItems={"center"}
+                            _hover={{ bgColor: "rgba(255,255,255,0.1)" }}
+                            onClick={loginAccount.onOpen}
                         >
                             <Text fontWeight={"bold"} color={"twitter.500"}>
                                 로그인
                             </Text>
-                        </Box>
+                        </Button>
                     </VStack>
                 </HStack>
 
@@ -219,6 +225,10 @@ export default function Home() {
                     isOpen={createAccount.isOpen}
                     onClose={createAccount.onClose}
                 ></CreateAccount>
+                <LoginAccount
+                    isOpen={loginAccount.isOpen}
+                    onClose={loginAccount.onClose}
+                ></LoginAccount>
             </Box>
         </>
     );
