@@ -5,6 +5,7 @@ import HomeButton from "./sidebar_style/home_button";
 import SearchButton from "./sidebar_style/search_button";
 import NoticeButton from "./sidebar_style/notice_button";
 import MessageButton from "./sidebar_style/message_button";
+import ListButton from "./sidebar_style/list_button";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function Sidebar() {
             <SearchButton />
             <NoticeButton />
             <MessageButton />
+            <ListButton />
         </VStack>
     );
 }
