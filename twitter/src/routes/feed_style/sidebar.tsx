@@ -9,6 +9,7 @@ import ListButton from "./sidebar_style/list_button";
 import BookmarkButton from "./sidebar_style/bookmark_button";
 import PremiumButton from "./sidebar_style/premium_button";
 import ProfileButton from "./sidebar_style/profile_button";
+import MoreButton from "./sidebar_style/more_button";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function Sidebar() {
             <BookmarkButton />
             <PremiumButton />
             <ProfileButton />
+            <MoreButton />
         </VStack>
     );
 }
