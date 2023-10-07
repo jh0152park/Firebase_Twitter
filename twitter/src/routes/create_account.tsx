@@ -12,11 +12,18 @@ import {
     ModalHeader,
     ModalOverlay,
     Select,
+    Spinner,
     Text,
+    useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import {
+    createUserWithEmailAndPassword,
+    updatePassword,
+    updateProfile,
+} from "firebase/auth";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { auth } from "../firebase";
 
 interface IModalForm {
     isOpen: boolean;
@@ -43,16 +50,41 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
         formState: { errors },
     } = useForm<ICreateAccountForm>();
 
+    const toast = useToast();
+
     const [BDay, SetBDay] = useState<string>();
     const [BMonth, SetBMonth] = useState<string>();
     const [BYear, SetBYear] = useState<string>();
+    const [createAccountLoading, setCreateAccountLoading] =
+        useState<boolean>(false);
 
-    function onFormSubmit() {
-        console.log("onFormSubmit");
-        console.log(watch());
-        console.log(`BYear: ${BYear}`);
-        console.log(`BMonth: ${BMonth}`);
-        console.log(`BDay: ${BDay}`);
+    async function onFormSubmit() {
+        // console.log("onFormSubmit");
+        // console.log(watch());
+        // console.log(`BYear: ${BYear}`);
+        // console.log(`BMonth: ${BMonth}`);
+        // console.log(`BDay: ${BDay}`);
+        try {
+            const credentials = await createUserWithEmailAndPassword(
+                auth,
+                watch("email"),
+                watch("password")
+            );
+            await updateProfile(credentials.user, {
+                displayName: watch("name"),
+            });
+            onClose();
+            setCreateAccountLoading(false);
+            toast({
+                title: "Welcome to 𝕏",
+                status: "success",
+                isClosable: true,
+                colorScheme: "twitter",
+            });
+        } catch (e) {
+            console.log("some error occurred when tired to create user");
+            console.log(e);
+        }
     }
 
     if (!Day.length) for (var i = 1; i < 32; i++) Day.push(i);
@@ -61,12 +93,13 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
 
     return (
         <>
-            {/* <Helmet>
-                <title>Sign up for X</title>
-            </Helmet> */}
             <Modal isOpen={isOpen} onClose={onClose} isCentered size={"xl"}>
                 <ModalOverlay bgColor={"rgba(27, 34, 41, 0.8)"}></ModalOverlay>
-                <ModalContent bgColor={"black"} minH={"600px"}>
+                <ModalContent
+                    bgColor={"black"}
+                    minH={"600px"}
+                    position={"relative"}
+                >
                     <ModalHeader fontSize={"30px"} my={5} px={"60px"}>
                         계정을 생성하세요
                     </ModalHeader>
@@ -97,26 +130,6 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                                     },
                                 })}
                                 isInvalid={Boolean(errors.name?.message)}
-                            ></Input>
-                            <Input
-                                type="text"
-                                placeholder="닉네임"
-                                border={"1px"}
-                                mb={7}
-                                {...register("nickname", {
-                                    required: true,
-                                    minLength: {
-                                        value: 3,
-                                        message:
-                                            "Nickname must be longer than 3 characters",
-                                    },
-                                    maxLength: {
-                                        value: 20,
-                                        message:
-                                            "Nickname must be shorter than 20 characters",
-                                    },
-                                })}
-                                isInvalid={Boolean(errors.nickname?.message)}
                             ></Input>
                             <Input
                                 type="email"
@@ -207,9 +220,6 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                             {errors.name?.message ? (
                                 <p>⚠️ {errors.name?.message}</p>
                             ) : null}
-                            {errors.nickname?.message ? (
-                                <p>⚠️ {errors.nickname?.message}</p>
-                            ) : null}
                             {errors.email?.message ? (
                                 <p>⚠️ {errors.email?.message}</p>
                             ) : null}
@@ -226,10 +236,22 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                                 borderRadius={"40px"}
                                 _hover={{ bgColor: "twitter.600" }}
                                 mb={5}
+                                onClick={() => {
+                                    setCreateAccountLoading(true);
+                                }}
                             >
                                 생성하기
                             </Button>
                         </Box>
+                        {createAccountLoading ? (
+                            <Spinner
+                                position={"absolute"}
+                                top={"50%"}
+                                left="0"
+                                right="0"
+                                margin={"auto"}
+                            />
+                        ) : null}
                     </ModalBody>
                 </ModalContent>
             </Modal>
