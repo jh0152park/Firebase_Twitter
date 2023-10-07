@@ -1,6 +1,6 @@
 import { Box, HStack, Wrap } from "@chakra-ui/react";
-import FeedBoard from "./feed_style/feed_board";
-import Sidebar from "./feed_style/sidebar";
+import FeedBoard from "./feed_styles/feed_board";
+import Sidebar from "./feed_styles/sidebar";
 import { Helmet } from "react-helmet";
 
 export default function Feed() {
