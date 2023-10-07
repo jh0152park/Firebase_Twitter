@@ -9,14 +9,17 @@ import {
     Text,
     VStack,
     useDisclosure,
+    useToast,
 } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { FaApple, FaGithub } from "react-icons/fa";
 import styled from "styled-components";
-import CreateAccount from "./create_account";
+import CreateAccount from "./login_modal/create_account";
+import LoginAccount from "./login_modal/login";
 import { useNavigate } from "react-router-dom";
-import LoginAccount from "./login";
+import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Hightlighter = styled.span`
     color: "#61b1fd";
@@ -60,8 +63,32 @@ const footer = [
 ];
 
 export default function Home() {
+    const toast = useToast();
+    const navigate = useNavigate();
+
     const createAccount = useDisclosure();
     const loginAccount = useDisclosure();
+
+    async function GithubLogin() {
+        console.log("Github login button clicked");
+
+        try {
+            const provider = new GithubAuthProvider();
+            await signInWithPopup(auth, provider);
+            toast({
+                status: "success",
+                title: "Github login successful",
+                description: "Enjoy your time with 𝕏",
+            });
+            navigate("/feed");
+        } catch (e) {
+            toast({
+                status: "error",
+                title: "Github login failed",
+                description: `Something went wrong, its might be helpful to you.\n${e}`,
+            });
+        }
+    }
 
     return (
         <>
@@ -108,13 +135,13 @@ export default function Home() {
                         >
                             <HStack>
                                 <FcGoogle size={"25px"} />
-                                <Text color={"black"}>
+                                <Text fontWeight={"bold"} color={"black"}>
                                     Google 계정으로 가입하기
                                 </Text>
                             </HStack>
                         </Box>
 
-                        <Box
+                        <Button
                             w="300px"
                             h="40px"
                             bgColor={"white"}
@@ -122,14 +149,15 @@ export default function Home() {
                             display={"flex"}
                             justifyContent={"center"}
                             alignItems={"center"}
+                            onClick={GithubLogin}
                         >
                             <HStack>
-                                <FaApple color="black" size={"25px"} />
+                                <FaGithub color="black" size={"25px"} />
                                 <Text fontWeight={"bold"} color={"black"}>
-                                    Apple에서 가입하기
+                                    Github에서 가입하기
                                 </Text>
                             </HStack>
-                        </Box>
+                        </Button>
 
                         <HStack w="300px" my={2}>
                             <Divider></Divider>
@@ -145,7 +173,7 @@ export default function Home() {
                             display={"flex"}
                             justifyContent={"center"}
                             alignItems={"center"}
-                            _hover={{ bgColor: "twitter.600" }}
+                            _hover={{ bgColor: "twitter.700" }}
                             onClick={createAccount.onOpen}
                         >
                             <Text fontWeight={"bold"} color={"white"}>
@@ -153,7 +181,7 @@ export default function Home() {
                             </Text>
                         </Button>
 
-                        <Box w="300px" fontSize={"12.1px"} opacity={"0.6"}>
+                        <Box w="300px" fontSize={"11px"} opacity={"0.6"}>
                             <span>
                                 가입하시려면{" "}
                                 <Hightlighter

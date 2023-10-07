@@ -23,8 +23,8 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { auth } from "../firebase";
-import { Navigate, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 
 interface IModalForm {
