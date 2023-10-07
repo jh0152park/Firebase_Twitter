@@ -23,7 +23,7 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 
