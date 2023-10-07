@@ -25,6 +25,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { auth } from "../firebase";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 
 interface IModalForm {
     isOpen: boolean;
@@ -48,6 +49,7 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
         handleSubmit,
         setValue,
         watch,
+        reset,
         formState: { errors },
     } = useForm<ICreateAccountForm>();
 
@@ -78,20 +80,23 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                 isClosable: true,
                 colorScheme: "twitter",
             });
+            reset();
+            onClose();
+            setCreateAccountLoading(false);
             navigate("/feed");
         } catch (e) {
-            console.log("some error occurred when tired to create user");
-            console.log(e);
-            toast({
-                title: "Created account failed",
-                status: "error",
-                isClosable: true,
-                description:
-                    "An error occurred when creating, try again please",
-            });
+            if (e instanceof FirebaseError) {
+                console.log("some error occurred when tired to create user");
+                console.log(e);
+                toast({
+                    title: "Created account failed",
+                    status: "error",
+                    isClosable: true,
+                    description: e.message,
+                });
+                setCreateAccountLoading(false);
+            }
         }
-        onClose();
-        setCreateAccountLoading(false);
     }
 
     if (!Day.length) for (var i = 1; i < 32; i++) Day.push(i);
@@ -100,7 +105,15 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
 
     return (
         <>
-            <Modal isOpen={isOpen} onClose={onClose} isCentered size={"xl"}>
+            <Modal
+                isOpen={isOpen}
+                onClose={() => {
+                    reset();
+                    onClose();
+                }}
+                isCentered
+                size={"xl"}
+            >
                 <ModalOverlay bgColor={"rgba(27, 34, 41, 0.8)"}></ModalOverlay>
                 <ModalContent
                     bgColor={"black"}
