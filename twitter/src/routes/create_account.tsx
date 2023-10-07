@@ -73,8 +73,6 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
             await updateProfile(credentials.user, {
                 displayName: watch("name"),
             });
-            onClose();
-            setCreateAccountLoading(false);
             toast({
                 title: "Welcome to 𝕏",
                 status: "success",
@@ -84,7 +82,16 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
         } catch (e) {
             console.log("some error occurred when tired to create user");
             console.log(e);
+            toast({
+                title: "Created account failed",
+                status: "error",
+                isClosable: true,
+                description:
+                    "An error occurred when creating, try again please",
+            });
         }
+        onClose();
+        setCreateAccountLoading(false);
     }
 
     if (!Day.length) for (var i = 1; i < 32; i++) Day.push(i);
