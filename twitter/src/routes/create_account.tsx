@@ -24,6 +24,7 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { auth } from "../firebase";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface IModalForm {
     isOpen: boolean;
@@ -58,13 +59,11 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
     const [createAccountLoading, setCreateAccountLoading] =
         useState<boolean>(false);
 
+    const navigate = useNavigate();
+
     async function onFormSubmit() {
-        // console.log("onFormSubmit");
-        // console.log(watch());
-        // console.log(`BYear: ${BYear}`);
-        // console.log(`BMonth: ${BMonth}`);
-        // console.log(`BDay: ${BDay}`);
         try {
+            setCreateAccountLoading(true);
             const credentials = await createUserWithEmailAndPassword(
                 auth,
                 watch("email"),
@@ -79,6 +78,7 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                 isClosable: true,
                 colorScheme: "twitter",
             });
+            navigate("/feed");
         } catch (e) {
             console.log("some error occurred when tired to create user");
             console.log(e);
@@ -243,9 +243,6 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                                 borderRadius={"40px"}
                                 _hover={{ bgColor: "twitter.600" }}
                                 mb={5}
-                                onClick={() => {
-                                    setCreateAccountLoading(true);
-                                }}
                             >
                                 생성하기
                             </Button>
