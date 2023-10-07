@@ -11,6 +11,7 @@ import PremiumButton from "./sidebar_style/premium_button";
 import ProfileButton from "./sidebar_style/profile_button";
 import MoreButton from "./sidebar_style/more_button";
 import PostButton from "./sidebar_style/post_button";
+import User from "./sidebar_style/user_button";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Sidebar() {
             <ProfileButton />
             <MoreButton />
             <PostButton />
+            <User />
         </VStack>
     );
 }
