@@ -15,17 +15,17 @@ export default function Feed() {
                         id="sidebar"
                         w="235px"
                         minH="100vh"
-                        borderLeft="1px"
-                        borderRight="1px"
-                        borderColor="rgba(255,255,255,0.2)"
+                        top="0"
+                        position="fixed"
                     >
                         <Sidebar></Sidebar>
                     </Box>
                     <Box
                         id="feed_board"
                         w="600px"
-                        mx="30px"
-                        minH="100vh"
+                        ml="272px"
+                        mr="30px"
+                        minH="200vh"
                         borderLeft="1px"
                         borderRight="1px"
                         borderColor="rgba(255,255,255,0.2)"
