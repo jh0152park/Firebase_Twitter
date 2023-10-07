@@ -38,6 +38,9 @@ export default function Header() {
                         }}
                         fontSize="15px"
                         fontWeight="bold"
+                        onClick={() => {
+                            setRecommend(true);
+                        }}
                     >
                         <Box
                             p="15px"
@@ -50,9 +53,6 @@ export default function Header() {
                             color={
                                 recommend ? "white" : "rgba(255, 255, 255, 0.4)"
                             }
-                            onClick={() => {
-                                setRecommend(true);
-                            }}
                         >
                             추천
                         </Box>
@@ -68,6 +68,9 @@ export default function Header() {
                         }}
                         fontSize="15px"
                         fontWeight="bold"
+                        onClick={() => {
+                            setRecommend(false);
+                        }}
                     >
                         <Box
                             p="15px"
@@ -82,9 +85,6 @@ export default function Header() {
                                     ? "white"
                                     : "rgba(255, 255, 255, 0.4)"
                             }
-                            onClick={() => {
-                                setRecommend(false);
-                            }}
                         >
                             팔로우 중
                         </Box>
