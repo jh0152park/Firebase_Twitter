@@ -7,6 +7,8 @@ import CreateAccount from "./routes/create_account";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/loading-screen";
 import { auth } from "./firebase";
+import Feed from "./routes/feed";
+import ProtectedRoute from "./components/protected-route";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "profile",
-                element: <Profile></Profile>,
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
             },
         ],
     },
@@ -27,10 +33,14 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
     },
-    // {
-    //     path: "/create-account",
-    //     element: <CreateAccount></CreateAccount>,
-    // },
+    {
+        path: "/feed",
+        element: (
+            <ProtectedRoute>
+                <Feed />
+            </ProtectedRoute>
+        ),
+    },
 ]);
 
 function App() {
