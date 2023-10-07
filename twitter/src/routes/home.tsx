@@ -18,7 +18,11 @@ import styled from "styled-components";
 import CreateAccount from "./login_modal/create_account";
 import LoginAccount from "./login_modal/login";
 import { useNavigate } from "react-router-dom";
-import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    GithubAuthProvider,
+    GoogleAuthProvider,
+    signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../firebase";
 
 const Hightlighter = styled.span`
@@ -90,6 +94,27 @@ export default function Home() {
         }
     }
 
+    async function GoogleLogin() {
+        console.log("Google login button clicked");
+
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+            toast({
+                status: "success",
+                title: "Google login successful",
+                description: "Enjoy your time with 𝕏",
+            });
+            navigate("/feed");
+        } catch (e) {
+            toast({
+                status: "error",
+                title: "Google login failed",
+                description: `Something went wrong, its might be helpful to you.\n${e}`,
+            });
+        }
+    }
+
     return (
         <>
             <Helmet>
@@ -123,7 +148,7 @@ export default function Home() {
                             지금 가입하세요
                         </Heading>
 
-                        <Box
+                        <Button
                             w="300px"
                             h="40px"
                             mb={2}
@@ -132,6 +157,7 @@ export default function Home() {
                             display={"flex"}
                             justifyContent={"center"}
                             alignItems={"center"}
+                            onClick={GoogleLogin}
                         >
                             <HStack>
                                 <FcGoogle size={"25px"} />
@@ -139,7 +165,7 @@ export default function Home() {
                                     Google 계정으로 가입하기
                                 </Text>
                             </HStack>
-                        </Box>
+                        </Button>
 
                         <Button
                             w="300px"
