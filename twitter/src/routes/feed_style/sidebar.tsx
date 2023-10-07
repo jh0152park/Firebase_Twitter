@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "./sidebar_style/logo";
 import HomeButton from "./sidebar_style/home_button";
 import SearchButton from "./sidebar_style/search_button";
+import NoticeButton from "./sidebar_style/notice_button";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Sidebar() {
             <Logo />
             <HomeButton />
             <SearchButton />
+            <NoticeButton />
         </VStack>
     );
 }
