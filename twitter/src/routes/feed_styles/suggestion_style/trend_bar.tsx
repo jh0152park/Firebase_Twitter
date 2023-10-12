@@ -33,10 +33,10 @@ export default function TrendBar() {
         <VStack
             mt="20px"
             w="350px"
-            // h="150px"
             bgColor="#121215"
             borderRadius="20px"
             alignItems="flex-start"
+            spacing="0"
         >
             <Text fontWeight="bold" fontSize="20px" m="15px">
                 나를 위한 트렌드
