@@ -18,6 +18,7 @@ export default function Feed() {
                         id="sidebar"
                         w="235px"
                         minH="100vh"
+                        maxH="100vh"
                         top="0"
                         position="fixed"
                     >
