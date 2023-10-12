@@ -48,6 +48,7 @@ export default function Influencer({ name, src, id }: IProfile) {
                 color="black"
                 fontSize="13px"
                 fontWeight="bold"
+                _hover={{ opacity: 0.9 }}
             >
                 팔로우
             </Center>
