@@ -1,18 +1,8 @@
-import {
-    Box,
-    HStack,
-    Icon,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Text,
-} from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 
 export default function SearchBar() {
-    const [clicked, setClicked] = useState<Boolean>(false);
-
     return (
         <InputGroup position="fixed">
             <InputLeftElement pt="10px" pl="10px">
