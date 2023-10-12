@@ -1,15 +1,16 @@
-import { Avatar, Box, HStack, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 
 export default function User() {
     return (
-        <Box
+        <Center
             w="100%"
-            mt="230px"
+            h="60px"
+            mt="210px"
             pl="10px"
             pr="10px"
             py="5px"
-            borderRadius="20px"
+            borderRadius="50px"
             _hover={{ cursor: "pointer", bgColor: "whiteAlpha.300" }}
         >
             <HStack w="100%" justifyContent="space-between">
@@ -29,6 +30,6 @@ export default function User() {
                     <BsThreeDots />
                 </Box>
             </HStack>
-        </Box>
+        </Center>
     );
 }
