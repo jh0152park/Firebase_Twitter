@@ -3,6 +3,8 @@ import FeedBoard from "./feed_styles/feed_board";
 import Sidebar from "./feed_styles/sidebar";
 import { Helmet } from "react-helmet";
 import SearchBar from "./feed_styles/suggestion_style/search_bar";
+import PremiumBar from "./feed_styles/suggestion_style/premium_bar";
+import SuggestionCards from "./feed_styles/suggestion_cards";
 
 export default function Feed() {
     return (
@@ -34,7 +36,7 @@ export default function Feed() {
                         <FeedBoard></FeedBoard>
                     </Box>
                     <Box id="suggestion" w="350px" h="100vh" pt="10px">
-                        <SearchBar />
+                        <SuggestionCards />
                     </Box>
                 </HStack>
             </Wrap>

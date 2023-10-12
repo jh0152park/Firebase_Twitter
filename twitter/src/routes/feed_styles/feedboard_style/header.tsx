@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <Box
             w="598px"
-            h="105px"
+            h="120px"
             position="fixed"
             top="0"
             borderBottom="1px"
