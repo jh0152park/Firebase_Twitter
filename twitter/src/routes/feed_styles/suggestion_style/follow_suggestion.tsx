@@ -42,7 +42,7 @@ export default function FollowBar() {
                 />
             ))}
 
-            <Box h="20px"></Box>
+            <Box h="15px"></Box>
         </VStack>
     );
 }

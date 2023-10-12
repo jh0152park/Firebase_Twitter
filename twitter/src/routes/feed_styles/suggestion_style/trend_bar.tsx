@@ -49,7 +49,7 @@ export default function TrendBar() {
                     post={item.post}
                 />
             ))}
-            <Box h="20px"></Box>
+            <Box h="15px"></Box>
         </VStack>
     );
 }
