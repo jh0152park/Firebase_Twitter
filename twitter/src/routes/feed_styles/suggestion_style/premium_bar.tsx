@@ -8,6 +8,7 @@ export default function PremiumBar() {
             bgColor="#121215"
             borderRadius="20px"
             p="15px"
+            mt="-25px"
             alignItems="flex-start"
         >
             <Text fontWeight="bold" fontSize="20px">

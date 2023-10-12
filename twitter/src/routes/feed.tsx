@@ -29,7 +29,7 @@ export default function Feed() {
                         w="600px"
                         ml="272px"
                         mr="30px"
-                        minH="100vh"
+                        minH="120vh"
                         borderLeft="1px"
                         borderRight="1px"
                         borderColor="rgba(255,255,255,0.2)"
