@@ -12,8 +12,10 @@ import { LuCalendarClock } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 import PostOptionButton from "./post_option_button";
 import CreatePostModal from "../../post/create_post_modal";
+import { auth } from "../../../firebase";
 
 export default function CreatePost() {
+    const user = auth.currentUser;
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -26,7 +28,12 @@ export default function CreatePost() {
         >
             <Box w="100%" h="100%" px="20px" pt="20px" pb="10px">
                 <HStack h="50%" w="100%">
-                    <Avatar w="40px" h="40px"></Avatar>
+                    <Avatar
+                        w="40px"
+                        h="40px"
+                        src={user?.photoURL as string}
+                        name={user?.displayName as string}
+                    />
                     <Box
                         color="rgba(255, 255, 255, 0.4)"
                         fontWeight="bold"
