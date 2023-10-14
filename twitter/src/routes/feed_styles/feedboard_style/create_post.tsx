@@ -1,4 +1,11 @@
-import { Avatar, Box, HStack, VStack, useDisclosure } from "@chakra-ui/react";
+import {
+    Avatar,
+    Box,
+    HStack,
+    Icon,
+    VStack,
+    useDisclosure,
+} from "@chakra-ui/react";
 import { AiOutlinePicture, AiOutlineFileGif } from "react-icons/ai";
 import { BsListStars, BsEmojiSmile } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
@@ -45,10 +52,22 @@ export default function CreatePost() {
                     justifyContent="space-between"
                 >
                     <HStack color="twitter.500" ml="50px" mt="10px" spacing="0">
-                        <PostOptionButton
-                            icon={AiOutlinePicture}
-                            enable={true}
-                        />
+                        <Box
+                            w="35px"
+                            h="35px"
+                            borderRadius="50%"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{
+                                cursor: "pointer",
+                                bgColor: "rgba(14, 59, 94, 0.5)",
+                            }}
+                            opacity="1"
+                            onClick={onOpen}
+                        >
+                            <Icon as={AiOutlinePicture} w="20px" h="20px" />
+                        </Box>
                         <PostOptionButton
                             icon={AiOutlineFileGif}
                             enable={false}
