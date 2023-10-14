@@ -1,5 +1,6 @@
 import { Box, Container, HStack, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import { auth } from "../../../firebase";
 
 export default function Header() {
     const [recommend, setRecommend] = useState(true);

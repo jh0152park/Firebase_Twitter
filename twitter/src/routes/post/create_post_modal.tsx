@@ -14,6 +14,7 @@ import {
     ModalOverlay,
     Text,
     Textarea,
+    useToast,
 } from "@chakra-ui/react";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { MdExpandMore } from "react-icons/md";
@@ -26,6 +27,8 @@ import PostOptionButton from "../feed_styles/feedboard_style/post_option_button"
 import { useRef, useState } from "react";
 import { HiOutlineUser } from "react-icons/hi";
 import { RiFileListLine } from "react-icons/ri";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
 interface ModalProps {
     isOpen: boolean;
@@ -33,8 +36,9 @@ interface ModalProps {
 }
 
 export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
+    const user = auth.currentUser;
+    const toast = useToast();
     const inputRef = useRef<any>();
-
     const [value, setValue] = useState("");
     const [attachedFile, setAttachedFile] = useState<any>("");
 
@@ -44,12 +48,34 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         }
     }
 
-    function onPostButtonClick() {
-        if (value.length) {
-            onClose();
-            console.log(value);
-            setValue("");
+    async function onPostButtonClick() {
+        console.log(user);
+
+        if (!value || !user) return;
+        if (value.length > 180) {
+            toast({
+                status: "error",
+                title: "Can't post!",
+                description:
+                    "Tweets are have to be shorter than 180 characters!",
+            });
         }
+
+        try {
+            await addDoc(collection(db, "tweets"), {
+                tweet: value,
+                createdAt: Date.now(),
+                username: user.displayName || "Anonymous",
+                userId: user.uid,
+            });
+            onModalClose();
+        } catch (e) {}
+
+        // if (value.length) {
+        //     onClose();
+        //     console.log(value);
+        //     setValue("");
+        // }
     }
 
     function onAttachedFileChaged(e: any) {
@@ -90,7 +116,12 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
 
                 <ModalBody>
                     <HStack alignItems="flex-start" mt="20px">
-                        <Avatar w="40px" h="40px" />
+                        <Avatar
+                            w="40px"
+                            h="40px"
+                            src={user?.photoURL as string}
+                            name={user?.displayName as string}
+                        />
                         <Center
                             w="100px"
                             h="25px"
@@ -116,7 +147,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                         fontSize="20px"
                         fontWeight="bold"
                         variant={"unstyled"}
-                        maxLength={180}
+                        maxLength={280}
                         pl="50px"
                         resize={"none"}
                         style={{ overflow: "hidden" }}
@@ -322,6 +353,9 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                     ? "pointer"
                                     : "default"
                             }
+                            _hover={{
+                                opacity: value.length ? 0.8 : 0.7,
+                            }}
                             onClick={onPostButtonClick}
                         >
                             게시하기
