@@ -24,6 +24,8 @@ import { IoLocationOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import PostOptionButton from "../feed_styles/feedboard_style/post_option_button";
 import { useRef, useState } from "react";
+import { HiOutlineUser } from "react-icons/hi";
+import { RiFileListLine } from "react-icons/ri";
 
 interface ModalProps {
     isOpen: boolean;
@@ -139,6 +141,55 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                 borderRadius="20px"
                                 src={attachedFile}
                             />
+
+                            <HStack mt="10px">
+                                <HStack
+                                    color="rgba(255, 255, 255, 0.5)"
+                                    display="flex"
+                                    justifyContent="flex-start"
+                                    alignItems="center"
+                                    _hover={{
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    <HiOutlineUser />
+                                    <Text
+                                        ml="-2px"
+                                        mt="2px"
+                                        fontSize="12px"
+                                        _hover={{
+                                            textDecoration: "underline",
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        사용자 태그하기
+                                    </Text>
+                                </HStack>
+                                <HStack
+                                    ml="45px"
+                                    color="rgba(255, 255, 255, 0.5)"
+                                    display="flex"
+                                    justifyContent="flex-start"
+                                    alignItems="center"
+                                    _hover={{
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    <RiFileListLine />
+                                    <Text
+                                        ml="-2px"
+                                        mt="2px"
+                                        fontSize="12px"
+                                        _hover={{
+                                            textDecoration: "underline",
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        설명 추가
+                                    </Text>
+                                </HStack>
+                            </HStack>
+
                             <Center
                                 w="30px"
                                 h="30px"
@@ -162,7 +213,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                 borderRadius="20px"
                                 bgColor="rgba(0, 0, 0, 0.7)"
                                 position="absolute"
-                                bottom="5px"
+                                bottom="30px"
                                 right="5px"
                                 fontWeight="bold"
                                 fontSize="15px"
