@@ -1,4 +1,4 @@
-import { Box, HStack, Wrap } from "@chakra-ui/react";
+import { Box, Center, HStack, Wrap } from "@chakra-ui/react";
 import FeedBoard from "./feed_styles/feed_board";
 import Sidebar from "./feed_styles/sidebar";
 import { Helmet } from "react-helmet";
@@ -12,16 +12,9 @@ export default function Feed() {
             <Helmet>
                 <title>홈 / X</title>
             </Helmet>
-            <Wrap mx={"335px"}>
+            <Center>
                 <HStack>
-                    <Box
-                        id="sidebar"
-                        w="235px"
-                        minH="100vh"
-                        maxH="100vh"
-                        top="0"
-                        position="fixed"
-                    >
+                    <Box id="sidebar" w="235px" position="fixed" top="0">
                         <Sidebar></Sidebar>
                     </Box>
                     <Box
@@ -36,11 +29,11 @@ export default function Feed() {
                     >
                         <FeedBoard></FeedBoard>
                     </Box>
-                    <Box id="suggestion" w="350px" h="100vh" pt="10px">
+                    <Box id="suggestion" w="350px" pt="10px">
                         <SuggestionCards />
                     </Box>
                 </HStack>
-            </Wrap>
+            </Center>
         </>
     );
 }
