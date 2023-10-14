@@ -28,9 +28,9 @@ import PostOptionButton from "../feed_styles/feedboard_style/post_option_button"
 import { useRef, useState } from "react";
 import { HiOutlineUser } from "react-icons/hi";
 import { RiFileListLine } from "react-icons/ri";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 interface ModalProps {
     isOpen: boolean;
@@ -46,6 +46,8 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     const [attachedFile, setAttachedFile] = useState<File | null>(null);
     const [attachedFileURL, setAttachedFileURL] = useState<any>("");
     const [uploading, setUploading] = useState(false);
+
+    const MB = 1 * 1024 * 1024;
 
     function onAttachedFileClick() {
         if (inputRef) {
@@ -79,7 +81,9 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                     storage,
                     `tweets/${user.uid}-${user.displayName}/${doc.id}`
                 );
-                await uploadBytes(localinfoRef, attachedFile);
+                const result = await uploadBytes(localinfoRef, attachedFile);
+                const imageURL = await getDownloadURL(result.ref);
+                await updateDoc(doc, { imageURL: imageURL });
             }
 
             onModalClose();
@@ -89,17 +93,20 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         } finally {
             setUploading(false);
         }
-
-        // if (value.length) {
-        //     onClose();
-        //     console.log(value);
-        //     setValue("");
-        // }
     }
 
     function onAttachedFileChaged(e: any) {
-        console.log(e.target.files);
+        const limit = 5;
         if (e.target.files.length <= 0) inputRef.current.value = "";
+
+        if (e.target.files[0].size > MB * limit) {
+            toast({
+                status: "warning",
+                title: "Can't upload this file!",
+                description: `File size is too big, choose different one less then ${limit}MB.`,
+            });
+            return;
+        }
 
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -119,6 +126,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     function onModalClose() {
         onClose();
         setValue("");
+        setAttachedFile(null);
         setAttachedFileURL("");
         inputRef.current.value = "";
     }
