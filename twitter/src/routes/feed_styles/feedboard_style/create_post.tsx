@@ -1,16 +1,9 @@
-import {
-    Avatar,
-    Box,
-    Button,
-    Container,
-    HStack,
-    VStack,
-    Wrap,
-} from "@chakra-ui/react";
+import { Avatar, Box, HStack, VStack } from "@chakra-ui/react";
 import { AiOutlinePicture, AiOutlineFileGif } from "react-icons/ai";
 import { BsListStars, BsEmojiSmile } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
+import PostOptionButton from "./post_option_button";
 
 export default function CreatePost() {
     return (
@@ -42,94 +35,24 @@ export default function CreatePost() {
                     justifyContent="space-between"
                 >
                     <HStack color="twitter.500" ml="50px" mt="10px" spacing="0">
-                        <Box
-                            w="32px"
-                            h="32px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <AiOutlinePicture size="20px" />
-                        </Box>
-                        <Box
-                            w="35px"
-                            h="35px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <AiOutlineFileGif size="20px" />
-                        </Box>
-
-                        <Box
-                            w="35px"
-                            h="35px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <BsListStars size="20px" />
-                        </Box>
-
-                        <Box
-                            w="35px"
-                            h="35px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <BsEmojiSmile size="20px" />
-                        </Box>
-
-                        <Box
-                            w="35px"
-                            h="35px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <LuCalendarClock size="20px" />
-                        </Box>
-
-                        <Box
-                            w="35px"
-                            h="35px"
-                            borderRadius="50%"
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgba(14, 59, 94, 0.5)",
-                            }}
-                        >
-                            <IoLocationOutline size="20px" />
-                        </Box>
+                        <PostOptionButton
+                            icon={AiOutlinePicture}
+                            enable={true}
+                        />
+                        <PostOptionButton
+                            icon={AiOutlineFileGif}
+                            enable={false}
+                        />
+                        <PostOptionButton icon={BsListStars} enable={false} />
+                        <PostOptionButton icon={BsEmojiSmile} enable={false} />
+                        <PostOptionButton
+                            icon={LuCalendarClock}
+                            enable={false}
+                        />
+                        <PostOptionButton
+                            icon={IoLocationOutline}
+                            enable={false}
+                        />
                     </HStack>
                     <Box
                         w="90px"
