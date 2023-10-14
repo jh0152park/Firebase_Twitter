@@ -1,6 +1,7 @@
 import {
     Avatar,
     Box,
+    Button,
     Center,
     Divider,
     HStack,
@@ -28,7 +29,8 @@ import { useRef, useState } from "react";
 import { HiOutlineUser } from "react-icons/hi";
 import { RiFileListLine } from "react-icons/ri";
 import { addDoc, collection } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
+import { ref, uploadBytes } from "firebase/storage";
 
 interface ModalProps {
     isOpen: boolean;
@@ -39,8 +41,11 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     const user = auth.currentUser;
     const toast = useToast();
     const inputRef = useRef<any>();
+
     const [value, setValue] = useState("");
-    const [attachedFile, setAttachedFile] = useState<any>("");
+    const [attachedFile, setAttachedFile] = useState<File | null>(null);
+    const [attachedFileURL, setAttachedFileURL] = useState<any>("");
+    const [uploading, setUploading] = useState(false);
 
     function onAttachedFileClick() {
         if (inputRef) {
@@ -49,9 +54,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     }
 
     async function onPostButtonClick() {
-        console.log(user);
-
-        if (!value || !user) return;
+        if ((!value && !attachedFile) || !user) return;
         if (value.length > 180) {
             toast({
                 status: "error",
@@ -62,14 +65,30 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         }
 
         try {
-            await addDoc(collection(db, "tweets"), {
+            setUploading(true);
+
+            const doc = await addDoc(collection(db, "tweets"), {
                 tweet: value,
                 createdAt: Date.now(),
                 username: user.displayName || "Anonymous",
                 userId: user.uid,
             });
+
+            if (attachedFile) {
+                const localinfoRef = ref(
+                    storage,
+                    `tweets/${user.uid}-${user.displayName}/${doc.id}`
+                );
+                await uploadBytes(localinfoRef, attachedFile);
+            }
+
             onModalClose();
-        } catch (e) {}
+        } catch (e) {
+            console.log("error occurred");
+            console.log(e);
+        } finally {
+            setUploading(false);
+        }
 
         // if (value.length) {
         //     onClose();
@@ -84,21 +103,23 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
 
         const file = e.target.files[0];
         const reader = new FileReader();
+
+        setAttachedFile(file);
         reader.onloadend = () => {
-            setAttachedFile(reader.result);
+            setAttachedFileURL(reader.result);
         };
         reader.readAsDataURL(file);
     }
 
     function onAttachedFileDelete() {
-        setAttachedFile("");
+        setAttachedFileURL("");
         inputRef.current.value = null;
     }
 
     function onModalClose() {
         onClose();
         setValue("");
-        setAttachedFile("");
+        setAttachedFileURL("");
         inputRef.current.value = "";
     }
 
@@ -142,6 +163,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                         </Center>
                     </HStack>
                     <Textarea
+                        required
                         placeholder="무슨 일이 일어나고 있나요?"
                         _placeholder={{ fontSize: "20px" }}
                         fontSize="20px"
@@ -156,7 +178,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             setValue(e.target.value);
                         }}
                     />
-                    {attachedFile && (
+                    {attachedFileURL && (
                         <Box
                             id="iamge"
                             minW="510px"
@@ -170,7 +192,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             <Image
                                 objectFit="cover"
                                 borderRadius="20px"
-                                src={attachedFile}
+                                src={attachedFileURL}
                             />
 
                             <HStack mt="10px">
@@ -336,7 +358,8 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                 enable={false}
                             />
                         </HStack>
-                        <Box
+                        <Button
+                            isLoading={uploading}
                             w="90px"
                             h="35px"
                             bgColor="twitter.600"
@@ -359,7 +382,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             onClick={onPostButtonClick}
                         >
                             게시하기
-                        </Box>
+                        </Button>
                     </Box>
                 </ModalBody>
             </ModalContent>
