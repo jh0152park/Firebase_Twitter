@@ -5,6 +5,7 @@ import {
     Divider,
     HStack,
     Icon,
+    Image,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -20,6 +21,7 @@ import { AiOutlinePicture, AiOutlineFileGif } from "react-icons/ai";
 import { BsListStars, BsEmojiSmile } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
 import PostOptionButton from "../feed_styles/feedboard_style/post_option_button";
 import { useRef, useState } from "react";
 
@@ -30,7 +32,9 @@ interface ModalProps {
 
 export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     const inputRef = useRef<any>();
+
     const [value, setValue] = useState("");
+    const [attachedFile, setAttachedFile] = useState<any>("");
 
     function onAttachedFileClick() {
         if (inputRef) {
@@ -46,15 +50,39 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         }
     }
 
+    function onAttachedFileChaged(e: any) {
+        console.log(e.target.files);
+        if (e.target.files.length <= 0) inputRef.current.value = "";
+
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setAttachedFile(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function onAttachedFileDelete() {
+        setAttachedFile("");
+        inputRef.current.value = null;
+    }
+
+    function onModalClose() {
+        onClose();
+        setValue("");
+        setAttachedFile("");
+        inputRef.current.value = "";
+    }
+
     return (
         <Modal
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={onModalClose}
             motionPreset="slideInBottom"
             size="xl"
         >
             <ModalOverlay bgColor="rgba(32, 39, 52, 0.5)" />
-            <ModalContent bgColor="black">
+            <ModalContent bgColor="black" minW="600px" minH="310px">
                 <ModalHeader>새 트윗 작성</ModalHeader>
                 <ModalCloseButton />
 
@@ -70,7 +98,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             color="twitter.500"
                             fontSize="15px"
                             fontWeight="bold"
-                            ml="10px"
+                            ml="5px"
                             mt="-5px"
                             _hover={{
                                 cursor: "pointer",
@@ -87,7 +115,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                         fontWeight="bold"
                         variant={"unstyled"}
                         maxLength={180}
-                        pl="55px"
+                        pl="50px"
                         resize={"none"}
                         style={{ overflow: "hidden" }}
                         value={value}
@@ -95,6 +123,61 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             setValue(e.target.value);
                         }}
                     />
+                    {attachedFile && (
+                        <Box
+                            id="iamge"
+                            minW="510px"
+                            maxW="510px"
+                            minH="340px"
+                            mt="10px"
+                            ml="50px"
+                            borderRadius="20px"
+                            position="relative"
+                        >
+                            <Image
+                                objectFit="cover"
+                                borderRadius="20px"
+                                src={attachedFile}
+                            />
+                            <Center
+                                w="30px"
+                                h="30px"
+                                borderRadius="50%"
+                                bgColor="rgba(0, 0, 0, 0.7)"
+                                position="absolute"
+                                top="5px"
+                                right="5px"
+                                _hover={{
+                                    cursor: "pointer",
+                                    bgColor: "rgba(0, 0, 0, 0.6)",
+                                    transition: "0.1s linear",
+                                }}
+                                onClick={onAttachedFileDelete}
+                            >
+                                <RxCross1 />
+                            </Center>
+                            <Center
+                                w="60px"
+                                h="30px"
+                                borderRadius="20px"
+                                bgColor="rgba(0, 0, 0, 0.7)"
+                                position="absolute"
+                                bottom="5px"
+                                right="5px"
+                                fontWeight="bold"
+                                fontSize="15px"
+                                _hover={{
+                                    cursor: "pointer",
+                                    bgColor: "#172124",
+                                    transition: "0.1s linear",
+                                }}
+                                onClick={onAttachedFileClick}
+                            >
+                                수정
+                            </Center>
+                        </Box>
+                    )}
+
                     <HStack>
                         <Center
                             fontSize="14px"
@@ -115,11 +198,13 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                 모든 사람이 답글을 달 수 있습니다
                             </Text>
                         </Center>
+
                         <input
                             ref={inputRef}
                             type="file"
                             accept="image/*"
                             style={{ opacity: 0, cursor: "default" }}
+                            onChange={onAttachedFileChaged}
                         ></input>
                     </HStack>
 
@@ -178,8 +263,14 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                             justifyContent="center"
                             alignItems="center"
                             fontWeight="bold"
-                            opacity={value.length ? 1 : 0.7}
-                            cursor={value.length ? "pointer" : "default"}
+                            opacity={value.length ? 1 : attachedFile ? 1 : 0.7}
+                            cursor={
+                                value.length
+                                    ? "pointer"
+                                    : attachedFile
+                                    ? "pointer"
+                                    : "default"
+                            }
                             onClick={onPostButtonClick}
                         >
                             게시하기
