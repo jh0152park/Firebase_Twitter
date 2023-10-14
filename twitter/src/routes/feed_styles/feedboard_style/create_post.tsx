@@ -1,11 +1,14 @@
-import { Avatar, Box, HStack, VStack } from "@chakra-ui/react";
+import { Avatar, Box, HStack, VStack, useDisclosure } from "@chakra-ui/react";
 import { AiOutlinePicture, AiOutlineFileGif } from "react-icons/ai";
 import { BsListStars, BsEmojiSmile } from "react-icons/bs";
 import { LuCalendarClock } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 import PostOptionButton from "./post_option_button";
+import CreatePostModal from "../../post/create_post_modal";
 
 export default function CreatePost() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <VStack
             w="100%"
@@ -23,6 +26,13 @@ export default function CreatePost() {
                         fontSize="20px"
                         ml="10px"
                         mb="5px"
+                        _hover={{ cursor: "text" }}
+                        w="100%"
+                        h="100%"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="flex-start"
+                        onClick={onOpen}
                     >
                         무슨 일이 일어나고 있나요?
                     </Box>
@@ -68,11 +78,13 @@ export default function CreatePost() {
                             opacity: 1,
                             cursor: "pointer",
                         }}
+                        onClick={onOpen}
                     >
                         게시하기
                     </Box>
                 </Box>
             </Box>
+            <CreatePostModal isOpen={isOpen} onClose={onClose} />
         </VStack>
     );
 }
