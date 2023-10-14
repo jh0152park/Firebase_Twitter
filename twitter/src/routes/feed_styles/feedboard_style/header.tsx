@@ -12,7 +12,8 @@ export default function Header() {
             top="0"
             borderBottom="1px"
             borderColor="rgba(255, 255, 255, 0.5)"
-            bgColor="rgba(0, 0, 0, 0.8)"
+            bgColor="rgba(0, 0, 0, 0.9)"
+            zIndex="99"
         >
             <VStack alignItems="flex-start" h="100%">
                 <Box
