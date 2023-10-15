@@ -49,6 +49,10 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
     const [uploading, setUploading] = useState(false);
 
     const MB = 1 * 1024 * 1024;
+    const comment = Math.floor(Math.random() * 1000);
+    const view = Math.floor(Math.random() * 9999);
+    const like = Math.floor(Math.random() * 9998);
+    const retweet = Math.floor(Math.random() * view);
 
     function onAttachedFileClick() {
         if (inputRef) {
@@ -70,7 +74,6 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
 
         try {
             setUploading(true);
-            console.log(user);
 
             const doc = await addDoc(collection(db, "tweets"), {
                 tweet: value,
@@ -78,6 +81,10 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 username: user.displayName || "Anonymous",
                 userId: user.uid,
                 creatorImageURL: user?.photoURL,
+                comment: comment,
+                view: view,
+                like: like,
+                retweet: retweet,
             });
 
             if (attachedFile) {

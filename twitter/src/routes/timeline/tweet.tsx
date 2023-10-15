@@ -1,4 +1,12 @@
-import { Avatar, Box, Center, HStack, Image, Text } from "@chakra-ui/react";
+import {
+    Avatar,
+    Box,
+    Center,
+    HStack,
+    Image,
+    Text,
+    VStack,
+} from "@chakra-ui/react";
 import { ITweet } from "./timeline";
 import { auth } from "../../firebase";
 import InteractButton from "./interact_button";
@@ -7,6 +15,7 @@ import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { BsThreeDots, BsUpload } from "react-icons/bs";
+import { useState } from "react";
 
 export default function Tweet({
     username,
@@ -15,8 +24,13 @@ export default function Tweet({
     userId,
     createdAt,
     creatorImageURL,
+    comment,
+    retweet,
+    like,
+    view,
 }: ITweet) {
     const user = auth.currentUser;
+
     const createed = new Date(createdAt);
     const time = createed.toLocaleDateString();
     const createdDate =
@@ -26,12 +40,7 @@ export default function Tweet({
         time.split(" ")[2].slice(0, -1) +
         "일";
 
-    const comment = Math.floor(Math.random() * 1000);
-    const view = Math.floor(Math.random() * 9999);
-    const like = Math.floor(Math.random() * 9998);
-    const retweet = Math.floor(Math.random() * view);
-
-    // console.log(username, imageURL, tweet, userId, createdAt, creatorImageURL);
+    const [more, setMore] = useState(false);
 
     return (
         <Box
@@ -47,7 +56,7 @@ export default function Tweet({
             bgColor="rgba(0, 0, 0, 1)"
             _hover={{
                 cursor: "pointer",
-                bgColor: "rgba(255, 255, 255, 0.1)",
+                bgColor: more ? "rgba(0,0,0,1)" : "rgba(255, 255, 255, 0.1)",
                 transition: "background 0.1s linear",
             }}
             position="relative"
@@ -59,8 +68,6 @@ export default function Tweet({
                         h="40px"
                         name={username}
                         src={creatorImageURL}
-                        border="1px"
-                        borderColor="rgba(255, 255, 255, 0.1)"
                     />
                 </Box>
                 <HStack alignItems="flex-start" mb="5px">
@@ -81,17 +88,68 @@ export default function Tweet({
                         bgColor: "rgba(28, 141, 238, 0.1)",
                         color: "twitter.600",
                     }}
+                    onClick={() => {
+                        setMore((prev) => !prev);
+                    }}
                 >
                     <BsThreeDots />
                 </Center>
             </HStack>
 
-            <Box w="510px" ml="60px" mb="20px" mt="-10px">
+            {more ? (
+                <VStack
+                    w="100px"
+                    h="70px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    border="1px"
+                    borderRadius="20px"
+                    borderColor="rgba(255, 255, 255, 0.2)"
+                    position="absolute"
+                    top="10px"
+                    right="40px"
+                    fontSize="15px"
+                    fontWeight="bold"
+                    spacing="0"
+                >
+                    <Center
+                        w="70px"
+                        py="5px"
+                        borderRadius="20px"
+                        color="twitter.500"
+                        _hover={{
+                            cursor: "pointer",
+                            bgColor: "twitter.500",
+                            color: "whitesmoke",
+                            transition: "background 0.2s linear",
+                        }}
+                    >
+                        수정하기
+                    </Center>
+                    <Center
+                        w="70px"
+                        py="5px"
+                        borderRadius="20px"
+                        color="rgb(231,0,104)"
+                        _hover={{
+                            cursor: "pointer",
+                            bgColor: "rgb(231,0,104)",
+                            color: "whitesmoke",
+                            transition: "background 0.2s linear",
+                        }}
+                    >
+                        삭제하기
+                    </Center>
+                </VStack>
+            ) : null}
+
+            <Box w="510px" ml="60px" mb="30px" mt="-10px">
                 {tweet}
             </Box>
 
             {imageURL ? (
-                <Box my="10px" ml="60px" minW="510px" maxW="510px">
+                <Box mt="40px" mb="10px" ml="60px" minW="510px" maxW="510px">
                     <Image
                         objectFit="cover"
                         src={imageURL}

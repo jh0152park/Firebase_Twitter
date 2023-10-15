@@ -12,6 +12,10 @@ export interface ITweet {
     userId: string;
     username: string;
     createdAt: number;
+    comment: number;
+    retweet: number;
+    like: number;
+    view: number;
 }
 
 export default function Timeline() {
@@ -36,6 +40,10 @@ export default function Timeline() {
                         username,
                         imageURL,
                         creatorImageURL,
+                        comment,
+                        retweet,
+                        like,
+                        view,
                     } = doc.data();
                     return {
                         tweet,
@@ -45,6 +53,10 @@ export default function Timeline() {
                         imageURL,
                         creatorImageURL,
                         id: doc.id,
+                        comment,
+                        retweet,
+                        like,
+                        view,
                     };
                 });
                 setTweets(tweets);
@@ -55,6 +67,8 @@ export default function Timeline() {
             unsubscribe && unsubscribe();
         };
     }, []);
+
+    console.log(tweets);
 
     return (
         <>
