@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import SearchBar from "./feed_styles/suggestion_style/search_bar";
 import PremiumBar from "./feed_styles/suggestion_style/premium_bar";
 import SuggestionCards from "./feed_styles/suggestion_cards";
+import GoToTop from "../components/go_to_top";
 
 export default function Feed() {
     return (
@@ -25,6 +26,7 @@ export default function Feed() {
                     </Box>
                 </HStack>
             </Center>
+            <GoToTop />
         </>
     );
 }
