@@ -7,7 +7,7 @@ import Timeline from "../timeline/timeline";
 
 export default function FeedBoard() {
     return (
-        <Box overflow="hidden" boxSizing="border-box">
+        <Box>
             <Header />
             <Buffer />
             <CreatePost />

@@ -4,7 +4,7 @@ import { BiSearch } from "react-icons/bi";
 
 export default function SearchBar() {
     return (
-        <Box position="fixed" top="0" w="350px" h="50px" bgColor="black">
+        <Box w="350px" h="50px" bgColor="black">
             <InputGroup mt="10px">
                 <InputLeftElement pt="10px" pl="10px">
                     <BiSearch size="20px" color="rgba(255, 255, 255, 0.4)" />
