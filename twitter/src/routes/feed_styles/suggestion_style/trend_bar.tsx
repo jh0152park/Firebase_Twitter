@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
 import TrendItem from "./trend_item";
 
 export default function TrendBar() {
@@ -49,6 +49,19 @@ export default function TrendBar() {
                     post={item.post}
                 />
             ))}
+            <Box
+                w="100%"
+                h="40px"
+                mt="10px"
+                px="15px"
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
+                color="twitter.500"
+                _hover={{ bgColor: "#18191C", cursor: "pointer" }}
+            >
+                <Text>더 보기</Text>
+            </Box>
             <Box h="15px"></Box>
         </VStack>
     );
