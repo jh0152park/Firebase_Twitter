@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    Divider,
     FormControl,
     HStack,
     Heading,
@@ -17,8 +18,11 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import {
+    GithubAuthProvider,
+    GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signInWithPopup,
     updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -26,6 +30,8 @@ import { useForm } from "react-hook-form";
 import { auth } from "../../firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 interface IModalForm {
     isOpen: boolean;
@@ -87,6 +93,52 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
                 });
                 setTryLogin(false);
             }
+        }
+    }
+
+    async function GithubLogin() {
+        // 2023. 10. 15
+        // twitter challenge for SNS login & sign in
+        console.log("Github login button clicked");
+
+        try {
+            const provider = new GithubAuthProvider();
+            await signInWithPopup(auth, provider);
+            toast({
+                status: "success",
+                title: "Github login successful",
+                description: "Enjoy your time with 𝕏",
+            });
+            navigate("/feed");
+        } catch (e) {
+            toast({
+                status: "error",
+                title: "Github login failed",
+                description: `Something went wrong, its might be helpful to you.\n${e}`,
+            });
+        }
+    }
+
+    async function GoogleLogin() {
+        // 2023. 10. 15
+        // twitter challenge for SNS login & sign in
+        console.log("Google login button clicked");
+
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+            toast({
+                status: "success",
+                title: "Google login successful",
+                description: "Enjoy your time with 𝕏",
+            });
+            navigate("/feed");
+        } catch (e) {
+            toast({
+                status: "error",
+                title: "Google login failed",
+                description: `Something went wrong, its might be helpful to you.\n${e}`,
+            });
         }
     }
 
@@ -163,7 +215,50 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
                             ) : null}
                         </Text>
 
-                        <Box mt={"40px"}>
+                        <Button
+                            w="100%"
+                            h="40px"
+                            mb={2}
+                            bgColor={"white"}
+                            borderRadius="50px"
+                            display={"flex"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            onClick={GoogleLogin}
+                        >
+                            <HStack>
+                                <FcGoogle size={"25px"} />
+                                <Text fontWeight={"bold"} color={"black"}>
+                                    Google 계정으로 로그인
+                                </Text>
+                            </HStack>
+                        </Button>
+
+                        <Button
+                            w="100%"
+                            h="40px"
+                            bgColor={"white"}
+                            borderRadius="50px"
+                            display={"flex"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            onClick={GithubLogin}
+                        >
+                            <HStack>
+                                <FaGithub color="black" size={"25px"} />
+                                <Text fontWeight={"bold"} color={"black"}>
+                                    Github에서 로그인하기
+                                </Text>
+                            </HStack>
+                        </Button>
+
+                        <HStack w="100%" my={2}>
+                            <Divider></Divider>
+                            <Text as={"b"}>or</Text>
+                            <Divider></Divider>
+                        </HStack>
+
+                        <Box>
                             <Button
                                 w="100%"
                                 type="submit"
