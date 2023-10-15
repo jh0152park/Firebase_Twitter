@@ -17,13 +17,7 @@ export default function Feed() {
                     <Box id="sidebar" w="235px" position="fixed" top="0">
                         <Sidebar></Sidebar>
                     </Box>
-                    <Box
-                        id="feed_board"
-                        w="600px"
-                        ml="272px"
-                        mr="30px"
-                        minH="100vh"
-                    >
+                    <Box id="feed_board" w="600px" ml="272px" mr="30px">
                         <FeedBoard></FeedBoard>
                     </Box>
                     <Box id="suggestion" w="350px" pt="10px">
