@@ -21,7 +21,8 @@ export default function CreatePost() {
     return (
         <VStack
             w="100%"
-            h="120px"
+            h="150px"
+            pt="30px"
             spacing="0"
             borderBottom="1px"
             borderLeft="1px"
