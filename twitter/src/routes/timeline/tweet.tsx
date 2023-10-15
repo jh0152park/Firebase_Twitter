@@ -87,6 +87,16 @@ export default function Tweet({
                 {tweet}
             </Box>
 
+            {imageURL ? (
+                <Box my="10px" ml="60px" minW="510px" maxW="510px">
+                    <Image
+                        objectFit="cover"
+                        src={imageURL}
+                        borderRadius="20px"
+                    />
+                </Box>
+            ) : null}
+
             <HStack
                 w="510px"
                 h="30px"
