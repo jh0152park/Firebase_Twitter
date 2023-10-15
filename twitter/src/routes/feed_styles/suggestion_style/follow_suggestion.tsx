@@ -41,7 +41,19 @@ export default function FollowBar() {
                     id={user.id}
                 />
             ))}
-
+            <Box
+                w="100%"
+                h="40px"
+                mt="10px"
+                px="15px"
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="center"
+                color="twitter.500"
+                _hover={{ bgColor: "#18191C", cursor: "pointer" }}
+            >
+                <Text>더 보기</Text>
+            </Box>
             <Box h="15px"></Box>
         </VStack>
     );

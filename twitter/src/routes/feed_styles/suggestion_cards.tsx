@@ -8,7 +8,7 @@ export default function SuggestionCards() {
     return (
         <>
             <SearchBar />
-            {/* <Buffer /> */}
+            <Buffer />
             <PremiumBar />
             <TrendBar />
             <FollowBar />

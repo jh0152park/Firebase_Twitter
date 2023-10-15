@@ -69,11 +69,11 @@ export default function Influencer({ name, src, id }: IProfile) {
                 </VStack>
             </HStack>
             <Center
-                w={following ? "80px" : "70px"}
+                w={following ? "70px" : "70px"}
                 h="30px"
                 border="1px"
                 borderRadius="50px"
-                borderColor={tryUnfollow ? "red" : "rgba(255, 255, 255, 0.4)"}
+                borderColor={tryUnfollow ? "red" : "rgba(255, 255, 255, 0.3)"}
                 bgColor={
                     tryUnfollow
                         ? "rgba(214, 47, 55, 0.1)"
