@@ -8,6 +8,7 @@ import {
     Spinner,
     Text,
     VStack,
+    useDisclosure,
     useToast,
 } from "@chakra-ui/react";
 import { ITweet } from "./timeline";
@@ -18,10 +19,11 @@ import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { BsThreeDots, BsUpload } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { delay } from "framer-motion";
+import EditPostModal from "../post/edit_post_modal";
 
 export default function Tweet({
     username,
@@ -50,6 +52,7 @@ export default function Tweet({
 
     const [more, setMore] = useState(false);
     const [deleteTweet, setDeleteTweet] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     async function onDeleteButtonClick() {
         if (user?.uid !== userId) {
@@ -100,6 +103,9 @@ export default function Tweet({
                 description:
                     "Only the person who created the tweet can edit it.",
             });
+        } else {
+            setMore(false);
+            onOpen();
         }
     }
 
@@ -157,8 +163,12 @@ export default function Tweet({
                 </Center>
             </HStack>
 
+            <Box w="510px" ml="60px" mb="30px" mt="-10px">
+                {tweet}
+            </Box>
+
             {more ? (
-                <Fade in={more} delay={0.1}>
+                <Fade in={more}>
                     <VStack
                         w="100px"
                         h="70px"
@@ -167,6 +177,7 @@ export default function Tweet({
                         alignItems="center"
                         border="1px"
                         borderRadius="20px"
+                        bgColor="rgba(0, 0, 0, 0.9)"
                         borderColor="rgba(255, 255, 255, 0.2)"
                         position="absolute"
                         top="10px"
@@ -208,10 +219,6 @@ export default function Tweet({
                     </VStack>
                 </Fade>
             ) : null}
-
-            <Box w="510px" ml="60px" mb="30px" mt="-10px">
-                {tweet}
-            </Box>
 
             {imageURL ? (
                 <Box mt="40px" mb="10px" ml="60px" minW="510px" maxW="510px">
@@ -281,6 +288,14 @@ export default function Tweet({
                     <Spinner size="xl" color="twitter.500" thickness="3px" />
                 </Center>
             ) : null}
+
+            <EditPostModal
+                isOpen={isOpen}
+                onClose={onClose}
+                tweet={tweet}
+                imageURL={imageURL}
+                postId={id}
+            />
         </Box>
     );
 }
