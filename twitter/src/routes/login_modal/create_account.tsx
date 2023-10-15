@@ -39,6 +39,8 @@ interface ICreateAccountForm {
     password: string;
 }
 
+// 2023. 10. 15
+// twitter challenge for SNS login & sign in
 export default function CreateAccount({ isOpen, onClose }: IModalForm) {
     let Day: number[] = [];
     let Month: number[] = [];
