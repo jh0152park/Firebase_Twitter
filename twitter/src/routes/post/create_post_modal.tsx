@@ -87,6 +87,12 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 const imageURL = await getDownloadURL(result.ref);
                 await updateDoc(doc, { imageURL: imageURL });
             }
+
+            toast({
+                status: "success",
+                title: "Posted!",
+                description: "Uploaded new post done😉",
+            });
         } catch (e) {
             console.log("error occurred");
             console.log(e);
