@@ -7,15 +7,31 @@ interface IInput {
     r: number;
     g: number;
     b: number;
+    click?: boolean;
 }
 
-export default function InteractButton({ icon, number, r, g, b }: IInput) {
+export default function InteractButton({
+    icon,
+    number,
+    r,
+    g,
+    b,
+    click,
+}: IInput) {
     const [hover, setHover] = useState(false);
+    const [like, setLike] = useState(false);
+
+    function onLikeClick() {
+        if (click) {
+            if (like) setLike(false);
+            else setLike(true);
+        }
+    }
 
     return (
         <HStack
             alignItems="center"
-            color="rgba(255, 255, 255, 0.5)"
+            color={like ? `rgb(${r}, ${g}, ${b})` : "rgba(255, 255, 255, 0.5)"}
             fontSize="14px"
             spacing="0"
             _hover={{
@@ -27,6 +43,7 @@ export default function InteractButton({ icon, number, r, g, b }: IInput) {
             onMouseOut={() => {
                 setHover(false);
             }}
+            onClick={onLikeClick}
         >
             <Center
                 w="30px"
@@ -40,7 +57,11 @@ export default function InteractButton({ icon, number, r, g, b }: IInput) {
             >
                 <Icon as={icon} width="17px" height="17px" />
             </Center>
-            <Text ml="5px">{number.toLocaleString("ko-KR")}</Text>
+            <Text ml="5px">
+                {like
+                    ? (number + 1).toLocaleString("ko-KR")
+                    : number.toLocaleString("ko-KR")}
+            </Text>
         </HStack>
     );
 }
