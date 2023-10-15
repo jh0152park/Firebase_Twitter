@@ -31,6 +31,7 @@ import { RiFileListLine } from "react-icons/ri";
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import EmojiPicker from "emoji-picker-react";
 
 interface ModalProps {
     isOpen: boolean;
@@ -129,6 +130,16 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         setAttachedFile(null);
         setAttachedFileURL("");
         inputRef.current.value = "";
+    }
+
+    function onEmojiClick() {
+        console.log("Emoji clicked");
+
+        return (
+            <div>
+                <EmojiPicker />
+            </div>
+        );
     }
 
     return (

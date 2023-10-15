@@ -74,6 +74,8 @@ export default function Home() {
     const loginAccount = useDisclosure();
 
     async function GithubLogin() {
+        // 2023. 10. 15
+        // twitter challenge for SNS login & sign in
         console.log("Github login button clicked");
 
         try {
@@ -95,6 +97,8 @@ export default function Home() {
     }
 
     async function GoogleLogin() {
+        // 2023. 10. 15
+        // twitter challenge for SNS login & sign in
         console.log("Google login button clicked");
 
         try {
