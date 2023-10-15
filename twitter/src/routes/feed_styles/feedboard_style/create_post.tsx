@@ -24,6 +24,8 @@ export default function CreatePost() {
             h="120px"
             spacing="0"
             borderBottom="1px"
+            borderLeft="1px"
+            borderRight="1px"
             borderColor="rgba(255, 255, 255, 0.5)"
         >
             <Box w="100%" h="100%" px="20px" pt="20px" pb="10px">
