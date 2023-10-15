@@ -47,6 +47,7 @@ export default function Tweet({
             _hover={{
                 cursor: "pointer",
                 bgColor: "rgba(255, 255, 255, 0.1)",
+                transition: "background 0.1s linear",
             }}
             position="relative"
         >
