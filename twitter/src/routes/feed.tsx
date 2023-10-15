@@ -12,7 +12,7 @@ export default function Feed() {
             <Helmet>
                 <title>홈 / X</title>
             </Helmet>
-            <Center>
+            <Center overflowY={"scroll"}>
                 <HStack>
                     <Box id="sidebar" w="235px" position="fixed" top="0">
                         <Sidebar></Sidebar>
