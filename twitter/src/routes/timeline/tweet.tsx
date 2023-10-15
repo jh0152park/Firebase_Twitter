@@ -114,6 +114,7 @@ export default function Tweet({
                     r={231}
                     g={0}
                     b={104}
+                    click={true}
                 />
                 <InteractButton
                     icon={BiBarChart}
