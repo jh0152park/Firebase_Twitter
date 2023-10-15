@@ -132,16 +132,6 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
         inputRef.current.value = "";
     }
 
-    function onEmojiClick() {
-        console.log("Emoji clicked");
-
-        return (
-            <div>
-                <EmojiPicker />
-            </div>
-        );
-    }
-
     return (
         <Modal
             isOpen={isOpen}
