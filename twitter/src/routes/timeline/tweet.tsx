@@ -1,14 +1,12 @@
 import { Avatar, Box, Center, HStack, Image, Text } from "@chakra-ui/react";
 import { ITweet } from "./timeline";
 import { auth } from "../../firebase";
-import { create } from "domain";
 import InteractButton from "./interact_button";
 import { FaRegComment } from "react-icons/fa";
 import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { BsThreeDots, BsUpload } from "react-icons/bs";
-import { FiMoreHorizontal } from "react-icons/fi";
 
 export default function Tweet({
     username,
@@ -16,6 +14,7 @@ export default function Tweet({
     tweet,
     userId,
     createdAt,
+    creatorImageURL,
 }: ITweet) {
     const user = auth.currentUser;
     const createed = new Date(createdAt);
@@ -31,6 +30,8 @@ export default function Tweet({
     const view = Math.floor(Math.random() * 9999);
     const like = Math.floor(Math.random() * 9998);
     const retweet = Math.floor(Math.random() * view);
+
+    // console.log(username, imageURL, tweet, userId, createdAt, creatorImageURL);
 
     return (
         <Box
@@ -56,8 +57,10 @@ export default function Tweet({
                     <Avatar
                         w="40px"
                         h="40px"
-                        name={user?.displayName as string}
-                        src={user?.photoURL as string}
+                        name={username}
+                        src={creatorImageURL}
+                        border="1px"
+                        borderColor="rgba(255, 255, 255, 0.1)"
                     />
                 </Box>
                 <HStack alignItems="flex-start" mb="5px">

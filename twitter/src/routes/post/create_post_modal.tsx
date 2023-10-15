@@ -70,12 +70,14 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
 
         try {
             setUploading(true);
+            console.log(user);
 
             const doc = await addDoc(collection(db, "tweets"), {
                 tweet: value,
                 createdAt: Date.now(),
                 username: user.displayName || "Anonymous",
                 userId: user.uid,
+                creatorImageURL: user?.photoURL,
             });
 
             if (attachedFile) {
