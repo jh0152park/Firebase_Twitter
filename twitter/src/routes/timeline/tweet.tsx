@@ -62,25 +62,32 @@ export default function Tweet({
         } else {
             if (window.confirm("Are you sure you want to delete?")) {
                 setDeleteTweet(true);
-                setTimeout(async () => {
-                    try {
-                        await deleteDoc(doc(db, "tweets", id));
-                        if (imageURL) {
-                            const imageRef = ref(
-                                storage,
-                                `tweets/${user.uid}-${user.displayName}/${id}`
+                setTimeout(
+                    async () => {
+                        try {
+                            await deleteDoc(doc(db, "tweets", id));
+                            if (imageURL) {
+                                const imageRef = ref(
+                                    storage,
+                                    `tweets/${user.uid}-${user.displayName}/${id}`
+                                );
+                                await deleteObject(imageRef);
+                            }
+                        } catch (e) {
+                            console.log(
+                                "occurred error when tired to delete tweet."
                             );
-                            await deleteObject(imageRef);
+                            console.log(e);
+                        } finally {
+                            setDeleteTweet(false);
+                            toast({
+                                status: "success",
+                                title: "Delete tweet successfully😎",
+                            });
                         }
-                    } catch (e) {
-                        console.log(
-                            "occurred error when tired to delete tweet."
-                        );
-                        console.log(e);
-                    } finally {
-                        setDeleteTweet(false);
-                    }
-                }, 1000);
+                    },
+                    imageURL ? 1000 : 500
+                );
             }
         }
     }
