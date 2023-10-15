@@ -65,6 +65,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 description:
                     "Tweets are have to be shorter than 180 characters!",
             });
+            return;
         }
 
         try {
@@ -86,13 +87,12 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 const imageURL = await getDownloadURL(result.ref);
                 await updateDoc(doc, { imageURL: imageURL });
             }
-
-            onModalClose();
         } catch (e) {
             console.log("error occurred");
             console.log(e);
         } finally {
             setUploading(false);
+            onModalClose();
         }
     }
 

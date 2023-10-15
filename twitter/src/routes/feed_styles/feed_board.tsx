@@ -11,8 +11,7 @@ export default function FeedBoard() {
             <Header />
             <Buffer />
             <CreatePost />
-
-            {/* <Timeline /> */}
+            <Timeline />
         </Box>
     );
 }

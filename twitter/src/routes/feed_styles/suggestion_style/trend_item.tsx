@@ -36,7 +36,7 @@ export default function TrendItem({ title, keyword, post }: ITrendItems) {
                 position="absolute"
                 color="rgba(255, 255, 255, 0.5)"
                 _hover={{
-                    bgColor: "rgba(28, 141, 238, 0.3)",
+                    bgColor: "rgba(28, 141, 238, 0.1)",
                     color: "twitter.600",
                 }}
             >
