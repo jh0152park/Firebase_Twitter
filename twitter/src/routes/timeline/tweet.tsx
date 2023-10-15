@@ -27,6 +27,11 @@ export default function Tweet({
         time.split(" ")[2].slice(0, -1) +
         "일";
 
+    const comment = Math.floor(Math.random() * 1000);
+    const view = Math.floor(Math.random() * 9999);
+    const like = Math.floor(Math.random() * 9998);
+    const retweet = Math.floor(Math.random() * view);
+
     return (
         <Box
             minW="600px"
@@ -89,14 +94,41 @@ export default function Tweet({
                 bottom="-10px"
                 justifyContent="space-between"
             >
-                <InteractButton icon={FaRegComment} number={351} />
+                <InteractButton
+                    icon={FaRegComment}
+                    number={comment}
+                    r={28}
+                    g={134}
+                    b={236}
+                />
                 <InteractButton
                     icon={HiOutlineArrowPathRoundedSquare}
-                    number={1816}
+                    number={retweet}
+                    r={37}
+                    g={240}
+                    b={108}
                 />
-                <InteractButton icon={AiOutlineHeart} number={0} />
-                <InteractButton icon={BiBarChart} number={2312} />
-                <InteractButton icon={BsUpload} number={""} />
+                <InteractButton
+                    icon={AiOutlineHeart}
+                    number={like}
+                    r={231}
+                    g={0}
+                    b={104}
+                />
+                <InteractButton
+                    icon={BiBarChart}
+                    number={view}
+                    r={28}
+                    g={134}
+                    b={236}
+                />
+                <InteractButton
+                    icon={BsUpload}
+                    number={""}
+                    r={255}
+                    g={255}
+                    b={255}
+                />
             </HStack>
         </Box>
     );
