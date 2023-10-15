@@ -17,7 +17,7 @@ import {
     Textarea,
     useToast,
 } from "@chakra-ui/react";
-import { FaEarthAmericas } from "react-icons/fa6";
+import { FaEarthAmericas, FaRegUser } from "react-icons/fa6";
 import { MdExpandMore } from "react-icons/md";
 import { AiOutlinePicture, AiOutlineFileGif } from "react-icons/ai";
 import { BsListStars, BsEmojiSmile } from "react-icons/bs";
@@ -214,7 +214,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                                         cursor: "pointer",
                                     }}
                                 >
-                                    <HiOutlineUser />
+                                    <FaRegUser />
                                     <Text
                                         ml="-2px"
                                         mt="2px"
