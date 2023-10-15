@@ -1,5 +1,14 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Avatar, Box, Center, HStack, Image, Text } from "@chakra-ui/react";
 import { ITweet } from "./timeline";
+import { auth } from "../../firebase";
+import { create } from "domain";
+import InteractButton from "./interact_button";
+import { FaRegComment } from "react-icons/fa";
+import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BiBarChart } from "react-icons/bi";
+import { BsThreeDots, BsUpload } from "react-icons/bs";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 export default function Tweet({
     username,
@@ -8,17 +17,87 @@ export default function Tweet({
     userId,
     createdAt,
 }: ITweet) {
+    const user = auth.currentUser;
+    const createed = new Date(createdAt);
+    const time = createed.toLocaleDateString();
+    const createdDate =
+        time.split(" ")[1].slice(0, -1) +
+        "월" +
+        " " +
+        time.split(" ")[2].slice(0, -1) +
+        "일";
+
     return (
-        <Box>
-            <Text>{username}</Text>
-            <Text>{userId.slice(0, 10)}</Text>
-            <Text>{createdAt}</Text>
-            <Text>{tweet}</Text>
-            {imageURL ? (
-                <Box w="100%" h="300px">
-                    <Image src={imageURL} objectFit="cover" />
+        <Box
+            minW="600px"
+            maxW="600px"
+            minH="110px"
+            px="20px"
+            py="15px"
+            borderBottom="1px"
+            borderLeft="1px"
+            borderRight="1px"
+            borderColor="rgba(255, 255, 255, 0.5)"
+            bgColor="rgba(0, 0, 0, 1)"
+            _hover={{
+                cursor: "pointer",
+                bgColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            position="relative"
+        >
+            <HStack alignItems="flex-start">
+                <Box w="40px" h="40px" mr="10px">
+                    <Avatar
+                        w="40px"
+                        h="40px"
+                        name={user?.displayName as string}
+                        src={user?.photoURL as string}
+                    />
                 </Box>
-            ) : null}
+                <HStack alignItems="flex-start" mb="5px">
+                    <Text fontWeight="bold">{username}</Text>
+                    <Text fontSize="14px" color="rgba(255, 255, 255, 0.4)">
+                        @{userId.slice(0, 10)} ∙ {createdDate}
+                    </Text>
+                </HStack>
+                <Center
+                    w="30px"
+                    h="30px"
+                    borderRadius="50%"
+                    top="10px"
+                    right="10px"
+                    position="absolute"
+                    color="rgba(255, 255, 255, 0.5)"
+                    _hover={{
+                        bgColor: "rgba(28, 141, 238, 0.1)",
+                        color: "twitter.600",
+                    }}
+                >
+                    <BsThreeDots />
+                </Center>
+            </HStack>
+
+            <Box w="510px" ml="60px" mb="20px" mt="-10px">
+                {tweet}
+            </Box>
+
+            <HStack
+                w="510px"
+                h="30px"
+                ml="60px"
+                position="relative"
+                bottom="-10px"
+                justifyContent="space-between"
+            >
+                <InteractButton icon={FaRegComment} number={351} />
+                <InteractButton
+                    icon={HiOutlineArrowPathRoundedSquare}
+                    number={1816}
+                />
+                <InteractButton icon={AiOutlineHeart} number={0} />
+                <InteractButton icon={BiBarChart} number={2312} />
+                <InteractButton icon={BsUpload} number={""} />
+            </HStack>
         </Box>
     );
 }
