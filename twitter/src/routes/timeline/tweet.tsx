@@ -2,13 +2,16 @@ import {
     Avatar,
     Box,
     Center,
+    Fade,
     HStack,
     Image,
+    Spinner,
     Text,
     VStack,
+    useToast,
 } from "@chakra-ui/react";
 import { ITweet } from "./timeline";
-import { auth } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 import InteractButton from "./interact_button";
 import { FaRegComment } from "react-icons/fa";
 import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
@@ -16,6 +19,9 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { BsThreeDots, BsUpload } from "react-icons/bs";
 import { useState } from "react";
+import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
+import { delay } from "framer-motion";
 
 export default function Tweet({
     username,
@@ -28,7 +34,9 @@ export default function Tweet({
     retweet,
     like,
     view,
+    id,
 }: ITweet) {
+    const toast = useToast();
     const user = auth.currentUser;
 
     const createed = new Date(createdAt);
@@ -41,6 +49,52 @@ export default function Tweet({
         "일";
 
     const [more, setMore] = useState(false);
+    const [deleteTweet, setDeleteTweet] = useState(false);
+
+    async function onDeleteButtonClick() {
+        if (user?.uid !== userId) {
+            toast({
+                status: "error",
+                title: "Can't delete tweet",
+                description:
+                    "Only the person who created the tweet can delete it.",
+            });
+        } else {
+            if (window.confirm("Are you sure you want to delete?")) {
+                setDeleteTweet(true);
+                setTimeout(async () => {
+                    try {
+                        await deleteDoc(doc(db, "tweets", id));
+                        if (imageURL) {
+                            const imageRef = ref(
+                                storage,
+                                `tweets/${user.uid}-${user.displayName}/${id}`
+                            );
+                            await deleteObject(imageRef);
+                        }
+                    } catch (e) {
+                        console.log(
+                            "occurred error when tired to delete tweet."
+                        );
+                        console.log(e);
+                    } finally {
+                        setDeleteTweet(false);
+                    }
+                }, 1000);
+            }
+        }
+    }
+
+    function onEditButtonClick() {
+        if (user?.uid !== userId) {
+            toast({
+                status: "warning",
+                title: "Can't edeit tweet",
+                description:
+                    "Only the person who created the tweet can edit it.",
+            });
+        }
+    }
 
     return (
         <Box
@@ -97,51 +151,55 @@ export default function Tweet({
             </HStack>
 
             {more ? (
-                <VStack
-                    w="100px"
-                    h="70px"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    border="1px"
-                    borderRadius="20px"
-                    borderColor="rgba(255, 255, 255, 0.2)"
-                    position="absolute"
-                    top="10px"
-                    right="40px"
-                    fontSize="15px"
-                    fontWeight="bold"
-                    spacing="0"
-                >
-                    <Center
-                        w="70px"
-                        py="5px"
+                <Fade in={more} delay={0.1}>
+                    <VStack
+                        w="100px"
+                        h="70px"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        border="1px"
                         borderRadius="20px"
-                        color="twitter.500"
-                        _hover={{
-                            cursor: "pointer",
-                            bgColor: "twitter.500",
-                            color: "whitesmoke",
-                            transition: "background 0.2s linear",
-                        }}
+                        borderColor="rgba(255, 255, 255, 0.2)"
+                        position="absolute"
+                        top="10px"
+                        right="40px"
+                        fontSize="15px"
+                        fontWeight="bold"
+                        spacing="0"
                     >
-                        수정하기
-                    </Center>
-                    <Center
-                        w="70px"
-                        py="5px"
-                        borderRadius="20px"
-                        color="rgb(231,0,104)"
-                        _hover={{
-                            cursor: "pointer",
-                            bgColor: "rgb(231,0,104)",
-                            color: "whitesmoke",
-                            transition: "background 0.2s linear",
-                        }}
-                    >
-                        삭제하기
-                    </Center>
-                </VStack>
+                        <Center
+                            w="70px"
+                            py="5px"
+                            borderRadius="20px"
+                            color="twitter.500"
+                            _hover={{
+                                cursor: "pointer",
+                                bgColor: "twitter.500",
+                                color: "whitesmoke",
+                                transition: "background 0.2s linear",
+                            }}
+                            onClick={onEditButtonClick}
+                        >
+                            수정하기
+                        </Center>
+                        <Center
+                            w="70px"
+                            py="5px"
+                            borderRadius="20px"
+                            color="rgb(231,0,104)"
+                            _hover={{
+                                cursor: "pointer",
+                                bgColor: "rgb(231,0,104)",
+                                color: "whitesmoke",
+                                transition: "background 0.2s linear",
+                            }}
+                            onClick={onDeleteButtonClick}
+                        >
+                            삭제하기
+                        </Center>
+                    </VStack>
+                </Fade>
             ) : null}
 
             <Box w="510px" ml="60px" mb="30px" mt="-10px">
@@ -203,6 +261,19 @@ export default function Tweet({
                     b={255}
                 />
             </HStack>
+
+            {deleteTweet ? (
+                <Center
+                    position="absolute"
+                    top="0"
+                    bottom="0"
+                    left="0"
+                    right="0"
+                    m="auto"
+                >
+                    <Spinner size="xl" color="twitter.500" thickness="3px" />
+                </Center>
+            ) : null}
         </Box>
     );
 }
