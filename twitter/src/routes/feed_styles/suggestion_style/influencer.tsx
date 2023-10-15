@@ -23,6 +23,7 @@ interface IProfile {
 
 export default function Influencer({ name, src, id }: IProfile) {
     const [following, setFollowing] = useState(false);
+    const [tryUnfollow, setTryUnfollow] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     function onFollowButtonClick() {
@@ -36,6 +37,10 @@ export default function Influencer({ name, src, id }: IProfile) {
     function onUnFollowButtonClick() {
         setFollowing(false);
         onClose();
+    }
+
+    function isUnfollowCondition() {
+        if (following) setTryUnfollow(true);
     }
 
     return (
@@ -64,19 +69,31 @@ export default function Influencer({ name, src, id }: IProfile) {
                 </VStack>
             </HStack>
             <Center
-                w="70px"
+                w={following ? "80px" : "70px"}
                 h="30px"
                 border="1px"
                 borderRadius="50px"
-                borderColor="rgba(255, 255, 255, 0.4)"
-                bgColor={following ? "rgba(0,0,0,0.8)" : "whitesmoke"}
-                color={!following ? "black" : "whitesmoke"}
+                borderColor={tryUnfollow ? "red" : "rgba(255, 255, 255, 0.4)"}
+                bgColor={
+                    tryUnfollow
+                        ? "rgba(214, 47, 55, 0.1)"
+                        : following
+                        ? "rgba(0,0,0,0.8)"
+                        : "whitesmoke"
+                }
+                color={
+                    tryUnfollow ? "red" : !following ? "black" : "whitesmoke"
+                }
                 fontSize="13px"
                 fontWeight="bold"
                 _hover={{ opacity: 0.9 }}
                 onClick={onFollowButtonClick}
+                onMouseOver={isUnfollowCondition}
+                onMouseOut={() => {
+                    setTryUnfollow(false);
+                }}
             >
-                {following ? "팔로잉" : "팔로우"}
+                {tryUnfollow ? "언팔로우" : following ? "팔로잉" : "팔로우"}
             </Center>
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
