@@ -21,7 +21,6 @@ export default function ProfileBoard() {
     let totalTweets;
     if (user) totalTweets = ComputeMyTotalTweetCount(user.uid);
 
-    // const totalTweets = ComputeMyTotalTweetCount();
     const currentOption = useRecoilValue(ProfileOptionButton);
     const mediaTweets = useRecoilValue(MediaTweets);
     const likedTweets = useRecoilValue(LikedTweets);

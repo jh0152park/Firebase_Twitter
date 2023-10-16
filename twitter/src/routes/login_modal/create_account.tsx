@@ -27,6 +27,7 @@ import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import { addDoc, collection } from "firebase/firestore";
+import { CreateUserField } from "../../global/util";
 
 interface IModalForm {
     isOpen: boolean;
@@ -40,8 +41,6 @@ interface ICreateAccountForm {
     password: string;
 }
 
-// 2023. 10. 15
-// twitter challenge for SNS login & sign in
 export default function CreateAccount({ isOpen, onClose }: IModalForm) {
     let Day: number[] = [];
     let Month: number[] = [];
@@ -78,10 +77,11 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                 displayName: watch("name"),
             });
 
-            const doc = await addDoc(collection(db, credentials.user.uid), {
-                following: [],
-                like: [],
-            });
+            // await addDoc(collection(db, credentials.user.uid), {
+            //     following: [],
+            //     like: [],
+            // });
+            CreateUserField(credentials.user.uid);
 
             toast({
                 title: "Welcome to 𝕏",
