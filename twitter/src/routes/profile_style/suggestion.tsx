@@ -31,6 +31,7 @@ export default function Suggestion() {
             borderLeft="1px"
             borderRight="1px"
             borderColor="rgba(255, 255, 255, 0.2)"
+            pl="10px"
         >
             <Text fontWeight="bold" fontSize="20px" m="15px">
                 팔로우 추천

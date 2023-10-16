@@ -27,11 +27,12 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { addDoc, collection } from "firebase/firestore";
 
 interface IModalForm {
     isOpen: boolean;
@@ -71,12 +72,14 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
                 watch("email"),
                 watch("password")
             );
+
             toast({
                 title: "Welcome to 𝕏",
                 status: "success",
                 isClosable: true,
                 colorScheme: "twitter",
             });
+
             reset();
             onClose();
             setTryLogin(false);
@@ -97,13 +100,19 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
     }
 
     async function GithubLogin() {
-        // 2023. 10. 15
-        // twitter challenge for SNS login & sign in
         console.log("Github login button clicked");
 
         try {
             const provider = new GithubAuthProvider();
             await signInWithPopup(auth, provider);
+
+            if (auth.currentUser) {
+                await addDoc(collection(db, auth.currentUser.uid), {
+                    following: [],
+                    like: [],
+                });
+            }
+
             toast({
                 status: "success",
                 title: "Github login successful",
@@ -120,13 +129,19 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
     }
 
     async function GoogleLogin() {
-        // 2023. 10. 15
-        // twitter challenge for SNS login & sign in
         console.log("Google login button clicked");
 
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
+
+            if (auth.currentUser) {
+                await addDoc(collection(db, auth.currentUser.uid), {
+                    following: [],
+                    like: [],
+                });
+            }
+
             toast({
                 status: "success",
                 title: "Google login successful",

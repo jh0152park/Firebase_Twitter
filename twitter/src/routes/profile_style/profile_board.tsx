@@ -6,22 +6,28 @@ import { useRecoilValue } from "recoil";
 import {
     LikedTweets,
     MediaTweets,
-    NumberOfTweets,
     ProfileOptionButton,
 } from "../../global/common";
 import Suggestion from "./suggestion";
 import Highlight from "./highlite";
 import MediaTimeline from "../timeline/medai_timeline";
 import LikedTimeline from "../timeline/liked_timeline";
+import { ComputeMyTotalTweetCount } from "../../global/util";
+import { auth } from "../../firebase";
 
 export default function ProfileBoard() {
-    const totalTweets = useRecoilValue(NumberOfTweets);
+    const user = auth.currentUser;
+
+    let totalTweets;
+    if (user) totalTweets = ComputeMyTotalTweetCount(user.uid);
+
+    // const totalTweets = ComputeMyTotalTweetCount();
     const currentOption = useRecoilValue(ProfileOptionButton);
     const mediaTweets = useRecoilValue(MediaTweets);
     const likedTweets = useRecoilValue(LikedTweets);
 
-    console.log(`mediaTweets: ${mediaTweets}`);
-    console.log(`likedTweets: ${likedTweets}`);
+    // console.log(`mediaTweets: ${mediaTweets}`);
+    // console.log(`likedTweets: ${likedTweets}`);
 
     return (
         <>

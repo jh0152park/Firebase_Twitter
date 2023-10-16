@@ -11,7 +11,6 @@ import {
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
-import { ITweet } from "./timeline";
 import { auth, db, storage } from "../../firebase";
 import InteractButton from "./interact_button";
 import { FaRegComment } from "react-icons/fa";
@@ -23,6 +22,7 @@ import { useEffect, useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import EditPostModal from "../post/edit_post_modal";
+import { ITweet } from "../../global/common";
 
 export default function Tweet({
     username,

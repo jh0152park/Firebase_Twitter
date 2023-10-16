@@ -1,5 +1,20 @@
 import { atom } from "recoil";
 
+export interface ITweet {
+    id: string;
+    imageURL: string;
+    creatorImageURL: string;
+    tweet: string;
+    userId: string;
+    username: string;
+    createdAt: number;
+    comment: number;
+    retweet: number;
+    like: number;
+    view: number;
+    isLiked: boolean;
+}
+
 export const BillGatesFollow = atom<boolean>({
     key: "billgates",
     default: false,
@@ -26,6 +41,11 @@ export const ConanFollow = atom<boolean>({
 export const BTSFollow = atom<boolean>({
     key: "bts",
     default: false,
+});
+
+export const EntireTweets = atom<ITweet[]>({
+    key: "enireTweets",
+    default: [],
 });
 
 export const NumberOfTweets = atom<number>({
