@@ -20,16 +20,18 @@ export default function User() {
     const [more, setMore] = useState(false);
 
     function signout() {
-        if (window.confirm("Are you sure you want to sign out?")) {
-            auth.signOut();
-            navigate("/");
-            toast({
-                status: "success",
-                title: "Sign out done",
-                description: "Sign out successfully🫡",
-            });
-        } else {
-            setMore(false);
+        if (more) {
+            if (window.confirm("Are you sure you want to sign out?")) {
+                auth.signOut();
+                navigate("/");
+                toast({
+                    status: "success",
+                    title: "Sign out done",
+                    description: "Sign out successfully🫡",
+                });
+            } else {
+                setMore(false);
+            }
         }
     }
 
@@ -49,6 +51,7 @@ export default function User() {
                 boxShadow="0px 0px 15px rgba(255, 255, 255, 0.3)"
                 opacity={more ? 1 : 0}
                 transition="all 0.2s linear"
+                cursor={more ? "pointer" : "default"}
             >
                 <VStack
                     w="100%"
@@ -62,7 +65,7 @@ export default function User() {
                         h="50%"
                         justifyContent="flex-start"
                         _hover={{
-                            cursor: "pointer",
+                            cursor: more ? "pointer" : "default",
                             bgColor: "whiteAlpha.300",
                             transition: "all 0.1s linear",
                         }}
@@ -75,7 +78,7 @@ export default function User() {
                         h="50%"
                         justifyContent="flex-start"
                         _hover={{
-                            cursor: "pointer",
+                            cursor: more ? "pointer" : "default",
                             bgColor: "whiteAlpha.300",
                             transition: "all 0.1s linear",
                         }}
