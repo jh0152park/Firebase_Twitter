@@ -23,11 +23,11 @@ export default function Suggestion() {
     return (
         <VStack
             w="600px"
-            // bgColor="#121215"
+            h="100vh"
             bgColor="black"
             alignItems="flex-start"
             spacing="0"
-            borderBottom="1px"
+            // borderBottom="1px"
             borderLeft="1px"
             borderRight="1px"
             borderColor="rgba(255, 255, 255, 0.2)"
