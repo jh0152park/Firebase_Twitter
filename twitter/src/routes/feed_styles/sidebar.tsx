@@ -17,7 +17,7 @@ export default function Sidebar() {
     const navigate = useNavigate();
 
     return (
-        <VStack alignItems={"flex-start"}>
+        <VStack alignItems={"flex-start"} spacing="0">
             <Logo />
             <HomeButton />
             <SearchButton />
