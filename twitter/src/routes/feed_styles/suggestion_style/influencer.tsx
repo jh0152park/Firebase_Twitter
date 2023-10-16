@@ -16,9 +16,12 @@ import {
 import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
+    BTSFollow,
     BillGatesFollow,
+    ConanFollow,
     ElonMuskFollow,
     NicoFollow,
+    TrumpFollow,
 } from "../../../global/common";
 
 interface IProfile {
@@ -31,6 +34,9 @@ export default function Influencer({ name, src, id }: IProfile) {
     const [billgate, setBillgate] = useRecoilState(BillGatesFollow);
     const [elonmusk, setElonmusk] = useRecoilState(ElonMuskFollow);
     const [nico, setNico] = useRecoilState(NicoFollow);
+    const [trump, setTrump] = useRecoilState(TrumpFollow);
+    const [conan, setConan] = useRecoilState(ConanFollow);
+    const [bts, setBTS] = useRecoilState(BTSFollow);
 
     const [following, setFollowing] = useState(
         name === "Bill Gates"
@@ -39,6 +45,12 @@ export default function Influencer({ name, src, id }: IProfile) {
             ? elonmusk
             : name === "Nico"
             ? nico
+            : name === "Team Trump (Text TRUMP to 88022)"
+            ? trump
+            : name === "Conan O'Brien"
+            ? conan
+            : name === "방탄소년단"
+            ? bts
             : false
     );
     const [tryUnfollow, setTryUnfollow] = useState(false);
@@ -49,8 +61,14 @@ export default function Influencer({ name, src, id }: IProfile) {
             setBillgate(on);
         } else if (name === "Elon Musk") {
             setElonmusk(on);
-        } else {
+        } else if (name === "Nico") {
             setNico(on);
+        } else if (name === "Team Trump (Text TRUMP to 88022)") {
+            setTrump(on);
+        } else if (name === "Conan O'Brien") {
+            setConan(on);
+        } else {
+            setBTS(on);
         }
     }
 

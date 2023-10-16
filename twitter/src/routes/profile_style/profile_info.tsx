@@ -4,15 +4,21 @@ import { BsCalendar3 } from "react-icons/bs";
 import { ComputeMonth } from "../../global/util";
 import { useRecoilValue } from "recoil";
 import {
+    BTSFollow,
     BillGatesFollow,
+    ConanFollow,
     ElonMuskFollow,
     NicoFollow,
+    TrumpFollow,
 } from "../../global/common";
 
 export default function ProfileInfo() {
     let billgate = useRecoilValue(BillGatesFollow);
     let elonmusk = useRecoilValue(ElonMuskFollow);
     let nico = useRecoilValue(NicoFollow);
+    let trump = useRecoilValue(TrumpFollow);
+    let conan = useRecoilValue(ConanFollow);
+    let bts = useRecoilValue(BTSFollow);
 
     const user = auth.currentUser;
     let time = user?.metadata.creationTime;
@@ -28,6 +34,9 @@ export default function ProfileInfo() {
     if (billgate) following++;
     if (elonmusk) following++;
     if (nico) following++;
+    if (trump) following++;
+    if (conan) following++;
+    if (bts) following++;
 
     return (
         <VStack w="150px" h="110px" mt="15px" ml="20px" alignItems="flex-start">
