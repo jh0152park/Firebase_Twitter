@@ -1,6 +1,7 @@
 import { useRecoilValue } from "recoil";
-import { auth } from "../firebase";
 import { EntireTweets } from "./common";
+import { db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const MONTH: any = {
     Jan: 1,
@@ -32,4 +33,12 @@ export function ComputeMyTotalTweetCount(uid: number | string) {
         // console.log("---------------------");
     }
     return cnt;
+}
+
+export async function CreateUserField(uid: string) {
+    await addDoc(collection(db, uid), {
+        following: [],
+        like: [],
+        background_image: "",
+    });
 }

@@ -6,11 +6,14 @@ import SuggestionCards from "./feed_styles/suggestion_cards";
 import GoToTop from "../components/go_to_top";
 import { useSetRecoilState } from "recoil";
 import { ProfileOptionButton } from "../global/common";
+import { auth } from "../firebase";
 
 export default function Feed() {
+    const user = auth.currentUser;
     const profileButtonState = useSetRecoilState(ProfileOptionButton);
 
     profileButtonState("게시물");
+
     return (
         <>
             <Helmet>

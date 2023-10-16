@@ -33,6 +33,7 @@ import { FirebaseError } from "firebase/app";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { addDoc, collection } from "firebase/firestore";
+import { CreateUserField } from "../../global/util";
 
 interface IModalForm {
     isOpen: boolean;
@@ -107,10 +108,11 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                await addDoc(collection(db, auth.currentUser.uid), {
-                    following: [],
-                    like: [],
-                });
+                // await addDoc(collection(db, auth.currentUser.uid), {
+                //     following: [],
+                //     like: [],
+                // });
+                CreateUserField(auth.currentUser.uid);
             }
 
             toast({
@@ -136,10 +138,11 @@ export default function LoginAccount({ isOpen, onClose }: IModalForm) {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                await addDoc(collection(db, auth.currentUser.uid), {
-                    following: [],
-                    like: [],
-                });
+                // await addDoc(collection(db, auth.currentUser.uid), {
+                //     following: [],
+                //     like: [],
+                // });
+                CreateUserField(auth.currentUser.uid);
             }
 
             toast({

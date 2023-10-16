@@ -25,6 +25,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { CreateUserField } from "../global/util";
 
 const Hightlighter = styled.span`
     color: "#61b1fd";
@@ -82,10 +83,11 @@ export default function Home() {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                await addDoc(collection(db, auth.currentUser.uid), {
-                    following: [],
-                    like: [],
-                });
+                // await addDoc(collection(db, auth.currentUser.uid), {
+                //     following: [],
+                //     like: [],
+                // });
+                CreateUserField(auth.currentUser.uid);
             }
 
             toast({
@@ -111,10 +113,11 @@ export default function Home() {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                await addDoc(collection(db, auth.currentUser.uid), {
-                    following: [],
-                    like: [],
-                });
+                // await addDoc(collection(db, auth.currentUser.uid), {
+                //     following: [],
+                //     like: [],
+                // });
+                CreateUserField(auth.currentUser.uid);
             }
 
             toast({
