@@ -1,4 +1,5 @@
 import { Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
+import OptionButton from "./option_button";
 
 export default function Option() {
     return (
@@ -12,7 +13,12 @@ export default function Option() {
             fontSize="15px"
             fontWeight="bold"
         >
-            <VStack
+            <OptionButton option="게시물" width={60} />
+            <OptionButton option="답글" width={60} />
+            <OptionButton option="하이라이트" width={65} />
+            <OptionButton option="미디어" width={60} />
+            <OptionButton option="마음에 들어요" width={80} />
+            {/* <VStack
                 h="100%"
                 w="100%"
                 _hover={{
@@ -77,7 +83,7 @@ export default function Option() {
                 }}
             >
                 마음에 들어요
-            </Center>
+            </Center> */}
         </HStack>
     );
 }

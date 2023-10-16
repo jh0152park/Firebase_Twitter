@@ -9,7 +9,7 @@ export default function Profile() {
     return (
         <Box
             w="600px"
-            h="500px"
+            h="501px"
             pt="35px"
             borderBottom="1px"
             borderLeft="1px"
