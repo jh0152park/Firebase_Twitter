@@ -1,16 +1,16 @@
-import { Avatar, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BackgroundImage from "./background_image";
 import ProfilePicture from "./profile_picture";
 import ProfileSetting from "./profile_setting";
 import ProfileInfo from "./profile_info";
+import Option from "./option";
 
-// avatar 140 * 140
-// 100% * 65px
 export default function Profile() {
     return (
         <Box
             w="600px"
-            h="460px"
+            h="500px"
+            pt="35px"
             borderBottom="1px"
             borderLeft="1px"
             borderRight="1px"
@@ -22,6 +22,7 @@ export default function Profile() {
             <ProfilePicture />
             <ProfileSetting />
             <ProfileInfo />
+            <Option />
         </Box>
     );
 }

@@ -4,7 +4,7 @@ import { auth } from "../../firebase";
 export default function ProfilePicture() {
     const user = auth.currentUser;
     return (
-        <Box position="absolute" left="20px" top="130px">
+        <Box position="absolute" left="20px" top="165px">
             <Avatar
                 w="140px"
                 h="140px"

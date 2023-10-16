@@ -1,5 +1,6 @@
 import { Center, HStack, Icon, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { FaHeart } from "react-icons/fa";
 
 interface IInput {
     icon: any;
@@ -55,7 +56,7 @@ export default function InteractButton({
                         : `rgba(${r}, ${g}, ${b}, 0)`
                 }
             >
-                <Icon as={icon} width="17px" height="17px" />
+                <Icon as={like ? FaHeart : icon} width="17px" height="17px" />
             </Center>
             <Text ml="5px">
                 {like
