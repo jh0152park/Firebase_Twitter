@@ -23,7 +23,8 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const Hightlighter = styled.span`
     color: "#61b1fd";
@@ -74,13 +75,19 @@ export default function Home() {
     const loginAccount = useDisclosure();
 
     async function GithubLogin() {
-        // 2023. 10. 15
-        // twitter challenge for SNS login & sign in
         console.log("Github login button clicked");
 
         try {
             const provider = new GithubAuthProvider();
             await signInWithPopup(auth, provider);
+
+            if (auth.currentUser) {
+                await addDoc(collection(db, auth.currentUser.uid), {
+                    following: [],
+                    like: [],
+                });
+            }
+
             toast({
                 status: "success",
                 title: "Github login successful",
@@ -97,13 +104,19 @@ export default function Home() {
     }
 
     async function GoogleLogin() {
-        // 2023. 10. 15
-        // twitter challenge for SNS login & sign in
         console.log("Google login button clicked");
 
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
+
+            if (auth.currentUser) {
+                await addDoc(collection(db, auth.currentUser.uid), {
+                    following: [],
+                    like: [],
+                });
+            }
+
             toast({
                 status: "success",
                 title: "Google login successful",

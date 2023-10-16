@@ -1,14 +1,14 @@
 import { Box, Center, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { BiLeftArrowAlt } from "react-icons/bi";
-import { useRecoilValue } from "recoil";
-import { NumberOfTweets } from "../../global/common";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { ComputeMyTotalTweetCount } from "../../global/util";
 
 export default function Header() {
     const user = auth.currentUser;
     const navigate = useNavigate();
-    const totalTweets = useRecoilValue(NumberOfTweets);
+    let totalTweets;
+    if (user) totalTweets = ComputeMyTotalTweetCount(user.uid);
 
     return (
         <Box

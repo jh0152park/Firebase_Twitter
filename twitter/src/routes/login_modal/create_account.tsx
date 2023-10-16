@@ -23,9 +23,10 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import { addDoc, collection } from "firebase/firestore";
 
 interface IModalForm {
     isOpen: boolean;
@@ -76,12 +77,19 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
             await updateProfile(credentials.user, {
                 displayName: watch("name"),
             });
+
+            const doc = await addDoc(collection(db, credentials.user.uid), {
+                following: [],
+                like: [],
+            });
+
             toast({
                 title: "Welcome to 𝕏",
                 status: "success",
                 isClosable: true,
                 colorScheme: "twitter",
             });
+
             reset();
             onClose();
             setCreateAccountLoading(false);

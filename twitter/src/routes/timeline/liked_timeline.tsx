@@ -3,26 +3,18 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import Tweet from "./tweet";
 import { Unsubscribe } from "firebase/auth";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { LikedTweets, MediaTweets, NumberOfTweets } from "../../global/common";
-
-export interface ITweet {
-    id: string;
-    imageURL: string;
-    creatorImageURL: string;
-    tweet: string;
-    userId: string;
-    username: string;
-    createdAt: number;
-    comment: number;
-    retweet: number;
-    like: number;
-    view: number;
-    isLiked: boolean;
-}
+import { useSetRecoilState } from "recoil";
+import {
+    EntireTweets,
+    ITweet,
+    LikedTweets,
+    MediaTweets,
+    NumberOfTweets,
+} from "../../global/common";
 
 export default function LikedTimeline() {
     const [tweets, setTweets] = useState<ITweet[]>([]);
+    const entireTweets = useSetRecoilState(EntireTweets);
     const totalTweets = useSetRecoilState(NumberOfTweets);
     const mediaTweets = useSetRecoilState(MediaTweets);
     const likedTweets = useSetRecoilState(LikedTweets);
@@ -70,6 +62,7 @@ export default function LikedTimeline() {
                     };
                 });
                 setTweets(tweets);
+                entireTweets(tweets);
                 totalTweets(tweets.length);
 
                 for (var tweet of tweets) {
