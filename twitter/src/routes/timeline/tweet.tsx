@@ -185,6 +185,7 @@ export default function Tweet({
                         fontSize="15px"
                         fontWeight="bold"
                         spacing="0"
+                        boxShadow="0px 0px 5px rgba(255, 255, 255, 0.5)"
                     >
                         <Center
                             w="70px"
