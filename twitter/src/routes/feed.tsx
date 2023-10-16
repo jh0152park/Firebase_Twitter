@@ -4,8 +4,13 @@ import Sidebar from "./feed_styles/sidebar";
 import { Helmet } from "react-helmet";
 import SuggestionCards from "./feed_styles/suggestion_cards";
 import GoToTop from "../components/go_to_top";
+import { useSetRecoilState } from "recoil";
+import { ProfileOptionButton } from "../global/common";
 
 export default function Feed() {
+    const profileButtonState = useSetRecoilState(ProfileOptionButton);
+
+    profileButtonState("게시물");
     return (
         <>
             <Helmet>

@@ -43,12 +43,12 @@ export const ProfileOptionButton = atom<string>({
     default: "게시물",
 });
 
-export const MediaTweet = atom<number>({
+export const MediaTweets = atom<number>({
     key: "mediaTweet",
     default: 0,
 });
 
-export const LikedTweet = atom<number>({
+export const LikedTweets = atom<number>({
     key: "likedTweet",
     default: 0,
 });
