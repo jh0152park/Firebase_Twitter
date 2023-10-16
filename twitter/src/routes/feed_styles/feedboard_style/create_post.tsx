@@ -27,7 +27,7 @@ export default function CreatePost() {
             borderBottom="1px"
             borderLeft="1px"
             borderRight="1px"
-            borderColor="rgba(255, 255, 255, 0.5)"
+            borderColor="rgba(255, 255, 255, 0.2)"
         >
             <Box w="100%" h="100%" px="20px" pt="20px" pb="10px">
                 <HStack h="50%" w="100%">

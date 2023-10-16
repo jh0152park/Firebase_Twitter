@@ -28,6 +28,8 @@ export default function User() {
                 title: "Sign out done",
                 description: "Sign out successfully🫡",
             });
+        } else {
+            setMore(false);
         }
     }
 
