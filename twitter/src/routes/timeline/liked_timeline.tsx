@@ -21,7 +21,7 @@ export interface ITweet {
     isLiked: boolean;
 }
 
-export default function Timeline() {
+export default function LikedTimeline() {
     const [tweets, setTweets] = useState<ITweet[]>([]);
     const totalTweets = useSetRecoilState(NumberOfTweets);
     const mediaTweets = useSetRecoilState(MediaTweets);
@@ -89,7 +89,11 @@ export default function Timeline() {
     return (
         <>
             {tweets.map((tweet) => (
-                <Tweet key={tweet.id} {...tweet}></Tweet>
+                <>
+                    {tweet.isLiked ? (
+                        <Tweet key={tweet.id} {...tweet}></Tweet>
+                    ) : null}
+                </>
             ))}
         </>
     );
