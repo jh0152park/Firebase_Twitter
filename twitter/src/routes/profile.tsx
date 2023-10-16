@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import SuggestionCards from "./feed_styles/suggestion_cards";
 import GoToTop from "../components/go_to_top";
 import { auth } from "../firebase";
+import ProfileBoard from "./profile_style/profile_board";
 
 export default function Profile() {
     const user = auth.currentUser;
@@ -18,10 +19,10 @@ export default function Profile() {
             <Center overflowY={"scroll"}>
                 <HStack>
                     <Box id="sidebar" w="235px" position="fixed" top="0">
-                        <Sidebar></Sidebar>
+                        <Sidebar />
                     </Box>
                     <Box id="feed_board" w="600px" ml="272px" mr="30px">
-                        {/* <FeedBoard></FeedBoard> */}
+                        <ProfileBoard />
                     </Box>
                     <Box id="suggestion" w="350px" pt="10px">
                         <SuggestionCards />
