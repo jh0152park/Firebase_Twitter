@@ -3,9 +3,11 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import { useRecoilValue } from "recoil";
 import { NumberOfTweets } from "../../global/common";
 import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const user = auth.currentUser;
+    const navigate = useNavigate();
     const totalTweets = useRecoilValue(NumberOfTweets);
 
     return (
@@ -30,6 +32,9 @@ export default function Header() {
                         cursor: "pointer",
                         bgColor: "rgba(255, 255, 255, 0.1)",
                         transition: "all 0.1s linear",
+                    }}
+                    onClick={() => {
+                        navigate("/feed");
                     }}
                 >
                     <BiLeftArrowAlt size={30} />
