@@ -36,7 +36,7 @@ export default function User() {
     return (
         <>
             <Box
-                mt="100px"
+                mt="90px"
                 ml="-40px"
                 w="300px"
                 h="110px"
@@ -90,7 +90,7 @@ export default function User() {
             <Center
                 w="100%"
                 h="60px"
-                // mt="210px"
+                mt="10px"
                 pl="10px"
                 pr="10px"
                 py="5px"

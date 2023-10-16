@@ -7,8 +7,8 @@ export default function BookmarkButton() {
             fontSize="30px"
             pl="10px"
             pr="20px"
-            py="5px"
-            borderRadius="20px"
+            py="10px"
+            borderRadius="30px"
             _hover={{ cursor: "pointer", bgColor: "whiteAlpha.300" }}
             mb="10px"
         >
