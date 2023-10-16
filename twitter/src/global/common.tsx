@@ -19,3 +19,8 @@ export const NumberOfTweets = atom<number>({
     key: "totalTweets",
     default: 0,
 });
+
+export const ProfileBGImage = atom<string>({
+    key: "profileBGImage",
+    default: "",
+});
