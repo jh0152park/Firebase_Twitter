@@ -2,6 +2,7 @@ import { Avatar, Box } from "@chakra-ui/react";
 import BackgroundImage from "./background_image";
 import ProfilePicture from "./profile_picture";
 import ProfileSetting from "./profile_setting";
+import ProfileInfo from "./profile_info";
 
 // avatar 140 * 140
 // 100% * 65px
@@ -20,6 +21,7 @@ export default function Profile() {
             <BackgroundImage />
             <ProfilePicture />
             <ProfileSetting />
+            <ProfileInfo />
         </Box>
     );
 }

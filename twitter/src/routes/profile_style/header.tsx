@@ -43,7 +43,7 @@ export default function Header() {
                     <Heading fontWeight="bold" fontSize="20px" mb="5px">
                         {user?.displayName}
                     </Heading>
-                    <Text color="rgba(255, 255, 255, 0.4)" fontSize="12px">
+                    <Text color="rgba(255, 255, 255, 0.4)" fontSize="13px">
                         {totalTweets} 게시물
                     </Text>
                 </VStack>
