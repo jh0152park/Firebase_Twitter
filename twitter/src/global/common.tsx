@@ -24,3 +24,8 @@ export const ProfileBGImage = atom<string>({
     key: "profileBGImage",
     default: "",
 });
+
+export const ProfileOptionButton = atom<string>({
+    key: "profileOptionButton",
+    default: "게시물",
+});
