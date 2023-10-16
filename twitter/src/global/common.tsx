@@ -15,6 +15,19 @@ export const NicoFollow = atom<boolean>({
     default: false,
 });
 
+export const TrumpFollow = atom<boolean>({
+    key: "trump",
+    default: false,
+});
+export const ConanFollow = atom<boolean>({
+    key: "conan",
+    default: false,
+});
+export const BTSFollow = atom<boolean>({
+    key: "bts",
+    default: false,
+});
+
 export const NumberOfTweets = atom<number>({
     key: "totalTweets",
     default: 0,
