@@ -14,7 +14,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
     BillGatesFollow,
     ElonMuskFollow,
@@ -28,21 +28,29 @@ interface IProfile {
 }
 
 export default function Influencer({ name, src, id }: IProfile) {
-    const [following, setFollowing] = useState(false);
+    const [billgate, setBillgate] = useRecoilState(BillGatesFollow);
+    const [elonmusk, setElonmusk] = useRecoilState(ElonMuskFollow);
+    const [nico, setNico] = useRecoilState(NicoFollow);
+
+    const [following, setFollowing] = useState(
+        name === "Bill Gates"
+            ? billgate
+            : name === "Elon Musk"
+            ? elonmusk
+            : name === "Nico"
+            ? nico
+            : false
+    );
     const [tryUnfollow, setTryUnfollow] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const billgate = useSetRecoilState(BillGatesFollow);
-    const elonmusk = useSetRecoilState(ElonMuskFollow);
-    const nico = useSetRecoilState(NicoFollow);
-
-    function tryInfluencerFollow() {
+    function tryInfluencerFollow(on: boolean) {
         if (name === "Bill Gates") {
-            billgate(following);
+            setBillgate(on);
         } else if (name === "Elon Musk") {
-            elonmusk(following);
+            setElonmusk(on);
         } else {
-            nico(following);
+            setNico(on);
         }
     }
 
@@ -51,14 +59,14 @@ export default function Influencer({ name, src, id }: IProfile) {
             onOpen();
         } else {
             setFollowing((prev) => !prev);
-            tryInfluencerFollow();
+            tryInfluencerFollow(true);
         }
     }
 
     function onUnFollowButtonClick() {
         setFollowing(false);
         onClose();
-        tryInfluencerFollow();
+        tryInfluencerFollow(false);
     }
 
     function isUnfollowCondition() {
