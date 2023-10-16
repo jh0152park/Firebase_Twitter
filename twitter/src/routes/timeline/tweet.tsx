@@ -119,7 +119,7 @@ export default function Tweet({
             borderBottom="1px"
             borderLeft="1px"
             borderRight="1px"
-            borderColor="rgba(255, 255, 255, 0.5)"
+            borderColor="rgba(255, 255, 255, 0.2)"
             bgColor="rgba(0, 0, 0, 1)"
             _hover={{
                 cursor: "pointer",
