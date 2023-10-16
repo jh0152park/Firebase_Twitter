@@ -1,9 +1,7 @@
-import { Box, Center, HStack, Wrap } from "@chakra-ui/react";
+import { Box, Center, HStack } from "@chakra-ui/react";
 import FeedBoard from "./feed_styles/feed_board";
 import Sidebar from "./feed_styles/sidebar";
 import { Helmet } from "react-helmet";
-import SearchBar from "./feed_styles/suggestion_style/search_bar";
-import PremiumBar from "./feed_styles/suggestion_style/premium_bar";
 import SuggestionCards from "./feed_styles/suggestion_cards";
 import GoToTop from "../components/go_to_top";
 
