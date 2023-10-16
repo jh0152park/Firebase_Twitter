@@ -14,3 +14,8 @@ export const NicoFollow = atom<boolean>({
     key: "nico",
     default: false,
 });
+
+export const NumberOfTweets = atom<number>({
+    key: "totalTweets",
+    default: 0,
+});

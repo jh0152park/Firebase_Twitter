@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import Tweet from "./tweet";
 import { Unsubscribe } from "firebase/auth";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { NumberOfTweets } from "../../global/common";
 
 export interface ITweet {
     id: string;
@@ -20,9 +22,9 @@ export interface ITweet {
 
 export default function Timeline() {
     const [tweets, setTweets] = useState<ITweet[]>([]);
+    const totalTweets = useSetRecoilState(NumberOfTweets);
 
     useEffect(() => {
-        // fetchTweeet();
         let unsubscribe: Unsubscribe | null = null;
 
         async function fetchTweeet() {
@@ -60,6 +62,7 @@ export default function Timeline() {
                     };
                 });
                 setTweets(tweets);
+                totalTweets(tweets.length);
             });
         }
         fetchTweeet();

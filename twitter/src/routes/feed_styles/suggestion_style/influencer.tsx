@@ -19,7 +19,7 @@ import {
     BillGatesFollow,
     ElonMuskFollow,
     NicoFollow,
-} from "../../../global/follow";
+} from "../../../global/common";
 
 interface IProfile {
     name: string;
