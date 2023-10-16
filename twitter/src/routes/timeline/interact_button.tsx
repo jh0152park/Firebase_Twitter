@@ -1,6 +1,8 @@
 import { Center, HStack, Icon, Text } from "@chakra-ui/react";
+import { doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { db } from "../../firebase";
 
 interface IInput {
     icon: any;
@@ -9,6 +11,8 @@ interface IInput {
     g: number;
     b: number;
     click?: boolean;
+    id?: string;
+    isLiked?: boolean;
 }
 
 export default function InteractButton({
@@ -18,14 +22,29 @@ export default function InteractButton({
     g,
     b,
     click,
+    id,
+    isLiked,
 }: IInput) {
     const [hover, setHover] = useState(false);
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState(isLiked ? isLiked : false);
 
-    function onLikeClick() {
+    async function onLikeClick() {
         if (click) {
-            if (like) setLike(false);
-            else setLike(true);
+            if (like) {
+                setLike(false);
+                if (id) {
+                    const postRef = doc(db, "tweets", id);
+                    await updateDoc(postRef, { isLiked: false });
+                }
+            } else {
+                setLike(true);
+                if (id) {
+                    const postRef = doc(db, "tweets", id);
+                    await updateDoc(postRef, {
+                        isLiked: true,
+                    });
+                }
+            }
         }
     }
 

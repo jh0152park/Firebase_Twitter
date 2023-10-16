@@ -26,12 +26,11 @@ import { IoLocationOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import PostOptionButton from "../feed_styles/feedboard_style/post_option_button";
 import { useRef, useState } from "react";
-import { HiOutlineUser } from "react-icons/hi";
+
 import { RiFileListLine } from "react-icons/ri";
 import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import EmojiPicker from "emoji-picker-react";
 
 interface ModalProps {
     isOpen: boolean;
@@ -85,6 +84,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 view: view,
                 like: like,
                 retweet: retweet,
+                isLiked: false,
             });
 
             if (attachedFile) {
