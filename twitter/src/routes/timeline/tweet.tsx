@@ -22,7 +22,6 @@ import { BsThreeDots, BsUpload } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
-import { delay } from "framer-motion";
 import EditPostModal from "../post/edit_post_modal";
 
 export default function Tweet({
@@ -37,6 +36,7 @@ export default function Tweet({
     like,
     view,
     id,
+    isLiked,
 }: ITweet) {
     const toast = useToast();
     const user = auth.currentUser;
@@ -260,6 +260,8 @@ export default function Tweet({
                     g={0}
                     b={104}
                     click={true}
+                    id={id}
+                    isLiked={isLiked}
                 />
                 <InteractButton
                     icon={BiBarChart}

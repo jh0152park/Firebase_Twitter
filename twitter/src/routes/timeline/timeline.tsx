@@ -18,6 +18,7 @@ export interface ITweet {
     retweet: number;
     like: number;
     view: number;
+    isLiked: boolean;
 }
 
 export default function Timeline() {
@@ -46,6 +47,7 @@ export default function Timeline() {
                         retweet,
                         like,
                         view,
+                        isLiked,
                     } = doc.data();
                     return {
                         tweet,
@@ -59,6 +61,7 @@ export default function Timeline() {
                         retweet,
                         like,
                         view,
+                        isLiked,
                     };
                 });
                 setTweets(tweets);
