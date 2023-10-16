@@ -134,7 +134,18 @@ export default function EditPostModal({
 
     function onAttachedFileChaged(e: any) {
         const limit = 5;
-        if (e.target.files.length <= 0) inputRef.current.value = "";
+        if (e.target.files.length <= 0) {
+            inputRef.current.value = "";
+            return;
+        }
+        if (e.target.files.length > 1) {
+            toast({
+                status: "warning",
+                title: "Can't upload files",
+                description: "We can upload only one photo, sorry😞",
+            });
+            return;
+        }
 
         if (e.target.files[0].size > MB * limit) {
             toast({
