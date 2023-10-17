@@ -22,12 +22,17 @@ export default function PremiumBar() {
                 mt="5px"
                 w="90px"
                 h="35px"
-                bgColor="twitter.600"
+                bgColor="twitter.500"
                 borderRadius="60px"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
                 fontWeight="bold"
+                _hover={{
+                    cursor: "pointer",
+                    bgColor: "twitter.600",
+                    transition: "all 0.1s linear",
+                }}
             >
                 게시하기
             </Box>
