@@ -15,6 +15,13 @@ export interface ITweet {
     isLiked: boolean;
 }
 
+export interface ILog {
+    background_image: string;
+    following: string[];
+    like: string[] | number[];
+    id: string;
+}
+
 export const BillGatesFollow = atom<boolean>({
     key: "billgates",
     default: false,
@@ -71,4 +78,14 @@ export const MediaTweets = atom<number>({
 export const LikedTweets = atom<number>({
     key: "likedTweet",
     default: 0,
+});
+
+export const TotalFollowing = atom<number>({
+    key: "TotalFollowing",
+    default: 0,
+});
+
+export const ProfilePageVisited = atom<boolean>({
+    key: "profilePageVisited",
+    default: false,
 });

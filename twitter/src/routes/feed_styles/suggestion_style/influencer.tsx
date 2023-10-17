@@ -14,7 +14,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import {
     BTSFollow,
     BillGatesFollow,
@@ -23,68 +23,57 @@ import {
     NicoFollow,
     TrumpFollow,
 } from "../../../global/common";
+import { type } from "os";
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebase";
 
 interface IProfile {
     name: string;
     src: string;
     id: string;
+    followings: string[];
+    dbId: string;
 }
 
-export default function Influencer({ name, src, id }: IProfile) {
-    const [billgate, setBillgate] = useRecoilState(BillGatesFollow);
-    const [elonmusk, setElonmusk] = useRecoilState(ElonMuskFollow);
-    const [nico, setNico] = useRecoilState(NicoFollow);
-    const [trump, setTrump] = useRecoilState(TrumpFollow);
-    const [conan, setConan] = useRecoilState(ConanFollow);
-    const [bts, setBTS] = useRecoilState(BTSFollow);
+export default function Influencer({
+    name,
+    src,
+    id,
+    followings,
+    dbId,
+}: IProfile) {
+    console.log(`input following list: ${followings}`);
 
-    const [following, setFollowing] = useState(
-        name === "Bill Gates"
-            ? billgate
-            : name === "Elon Musk"
-            ? elonmusk
-            : name === "Nico"
-            ? nico
-            : name === "Team Trump (Text TRUMP to 88022)"
-            ? trump
-            : name === "Conan O'Brien"
-            ? conan
-            : name === "방탄소년단"
-            ? bts
-            : false
+    const user = auth.currentUser;
+    const [following, setFollowing] = useState<boolean>(
+        followings.includes(name)
     );
     const [tryUnfollow, setTryUnfollow] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    function tryInfluencerFollow(on: boolean) {
-        if (name === "Bill Gates") {
-            setBillgate(on);
-        } else if (name === "Elon Musk") {
-            setElonmusk(on);
-        } else if (name === "Nico") {
-            setNico(on);
-        } else if (name === "Team Trump (Text TRUMP to 88022)") {
-            setTrump(on);
-        } else if (name === "Conan O'Brien") {
-            setConan(on);
-        } else {
-            setBTS(on);
-        }
-    }
-
-    function onFollowButtonClick() {
+    async function onFollowButtonClick() {
         if (following) {
             onOpen();
         } else {
-            setFollowing((prev) => !prev);
-            tryInfluencerFollow(true);
+            if (user) {
+                setFollowing((prev) => !prev);
+                const follow = doc(db, user.uid, dbId);
+                await updateDoc(follow, {
+                    following: [...followings, name],
+                });
+            }
         }
     }
 
-    function onUnFollowButtonClick() {
+    async function onUnFollowButtonClick() {
         setFollowing(false);
         onClose();
-        tryInfluencerFollow(false);
+        if (user) {
+            const follow = doc(db, user.uid, dbId);
+            await updateDoc(follow, {
+                following: followings.filter((f) => f != name),
+            });
+        }
     }
 
     function isUnfollowCondition() {

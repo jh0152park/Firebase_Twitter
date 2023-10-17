@@ -83,10 +83,6 @@ export default function Home() {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                // await addDoc(collection(db, auth.currentUser.uid), {
-                //     following: [],
-                //     like: [],
-                // });
                 CreateUserField(auth.currentUser.uid);
             }
 
@@ -113,10 +109,6 @@ export default function Home() {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
-                // await addDoc(collection(db, auth.currentUser.uid), {
-                //     following: [],
-                //     like: [],
-                // });
                 CreateUserField(auth.currentUser.uid);
             }
 

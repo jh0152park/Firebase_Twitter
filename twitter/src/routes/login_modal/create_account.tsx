@@ -77,10 +77,6 @@ export default function CreateAccount({ isOpen, onClose }: IModalForm) {
                 displayName: watch("name"),
             });
 
-            // await addDoc(collection(db, credentials.user.uid), {
-            //     following: [],
-            //     like: [],
-            // });
             CreateUserField(credentials.user.uid);
 
             toast({
