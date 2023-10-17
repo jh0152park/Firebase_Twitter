@@ -1,6 +1,16 @@
-import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 
 export default function PremiumBar() {
+    const toast = useToast();
+
+    function NotSupport() {
+        toast({
+            status: "info",
+            title: "Not supported",
+            description: "Opps! we don't support this yet 🥹",
+        });
+    }
+
     return (
         <VStack
             w="350px"
@@ -33,6 +43,7 @@ export default function PremiumBar() {
                     bgColor: "twitter.600",
                     transition: "all 0.1s linear",
                 }}
+                onClick={NotSupport}
             >
                 게시하기
             </Box>

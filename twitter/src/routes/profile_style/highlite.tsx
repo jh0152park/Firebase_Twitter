@@ -1,6 +1,16 @@
-import { Box, Center, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 
 export default function Highlight() {
+    const toast = useToast();
+
+    function NotSupport() {
+        toast({
+            status: "info",
+            title: "Not supported",
+            description: "Opps! we don't support this yet 🥹",
+        });
+    }
+
     return (
         <Center
             w="600px"
@@ -37,6 +47,7 @@ export default function Highlight() {
                         bgColor: "rgba(255, 255, 255, 0.9)",
                         transition: "all 0.1s linear",
                     }}
+                    onClick={NotSupport}
                 >
                     Premium 구독하기
                 </Center>
