@@ -22,7 +22,7 @@ import { useRef, useState } from "react";
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRecoilValue } from "recoil";
-import { MyDBID, ProfileBGImage } from "../../global/common";
+import { EntireTweets, MyDBID, ProfileBGImage } from "../../global/common";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +39,7 @@ export default function ProfileSettingModal({ isOpen, onClose }: IModal) {
     const profilePhotoInputRef = useRef<any>();
     const headerPhotoInputRef = useRef<any>();
     const BGImage = useRecoilValue(ProfileBGImage);
+    const entireTweets = useRecoilValue(EntireTweets);
 
     const MB = 1 * 1024 * 1024;
 
@@ -147,7 +148,10 @@ export default function ProfileSettingModal({ isOpen, onClose }: IModal) {
     async function onSubmitChange() {
         if (user) {
             try {
+                console.log("change user profile picture");
+                console.log(entireTweets);
                 setUpdate(true);
+
                 if (profilePhoto) {
                     const localinfoRef = ref(
                         storage,
@@ -159,6 +163,15 @@ export default function ProfileSettingModal({ isOpen, onClose }: IModal) {
                     );
                     const imageURL = await getDownloadURL(result.ref);
                     updateProfile(user, { photoURL: imageURL });
+
+                    for (var tweet of entireTweets) {
+                        if (user.displayName === tweet.username) {
+                            const tweetRef = doc(db, "tweets", tweet.id);
+                            await updateDoc(tweetRef, {
+                                creatorImageURL: imageURL,
+                            });
+                        }
+                    }
                 }
 
                 if (headerPhoto) {
