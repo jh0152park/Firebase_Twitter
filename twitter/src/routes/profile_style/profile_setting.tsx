@@ -1,6 +1,9 @@
-import { Box, Center } from "@chakra-ui/react";
+import { Box, Center, useDisclosure } from "@chakra-ui/react";
+import ProfileSettingModal from "./profile_setting_modal";
 
 export default function ProfileSetting() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Box
             py="15px"
@@ -23,9 +26,11 @@ export default function ProfileSetting() {
                     bgColor: "rgba(255, 255, 255, 0.1)",
                     transition: "all 0.2s linear",
                 }}
+                onClick={onOpen}
             >
                 프로필 설정하기
             </Center>
+            <ProfileSettingModal isOpen={isOpen} onClose={onClose} />
         </Box>
     );
 }

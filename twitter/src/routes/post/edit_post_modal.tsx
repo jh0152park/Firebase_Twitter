@@ -7,6 +7,7 @@ import {
     HStack,
     Icon,
     Image,
+    Input,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -349,7 +350,7 @@ export default function EditPostModal({
                             fontWeight="bold"
                             color="twitter.500"
                             mt="40px"
-                            ml="-5px"
+                            ml="-10px"
                             w="230px"
                             h="25px"
                             borderRadius="20px"
@@ -364,13 +365,14 @@ export default function EditPostModal({
                             </Text>
                         </Center>
 
-                        <input
+                        <Input
                             ref={inputRef}
                             type="file"
                             accept="image/*"
-                            style={{ opacity: 0, cursor: "default" }}
+                            // style={{ opacity: 0, cursor: "default" }}
+                            display="none"
                             onChange={onAttachedFileChaged}
-                        ></input>
+                        ></Input>
                     </HStack>
 
                     <Divider my="10px" color="rgba(255, 255, 255, 0.4)" />

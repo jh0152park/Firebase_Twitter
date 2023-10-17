@@ -18,7 +18,7 @@ import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { BsThreeDots, BsUpload } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import EditPostModal from "../post/edit_post_modal";

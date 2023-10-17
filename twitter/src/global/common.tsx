@@ -90,3 +90,8 @@ export const ProfilePageVisited = atom<boolean>({
     key: "profilePageVisited",
     default: false,
 });
+
+export const MyDBID = atom<string>({
+    key: "myDBID",
+    default: "",
+});
