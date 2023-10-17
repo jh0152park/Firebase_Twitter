@@ -3,40 +3,19 @@ import { auth } from "../../firebase";
 import { BsCalendar3 } from "react-icons/bs";
 import { ComputeMonth } from "../../global/util";
 import { useRecoilValue } from "recoil";
-import {
-    BTSFollow,
-    BillGatesFollow,
-    ConanFollow,
-    ElonMuskFollow,
-    NicoFollow,
-    TrumpFollow,
-} from "../../global/common";
+import { TotalFollowing } from "../../global/common";
 
 export default function ProfileInfo() {
-    let billgate = useRecoilValue(BillGatesFollow);
-    let elonmusk = useRecoilValue(ElonMuskFollow);
-    let nico = useRecoilValue(NicoFollow);
-    let trump = useRecoilValue(TrumpFollow);
-    let conan = useRecoilValue(ConanFollow);
-    let bts = useRecoilValue(BTSFollow);
-
     const user = auth.currentUser;
     let time = user?.metadata.creationTime;
     let year = 2023;
     let month = 10;
-    let following = 0;
+    const following = useRecoilValue(TotalFollowing);
 
     if (time) {
         year = +time.split(" ")[3];
         month = ComputeMonth(time.split(" ")[2]);
     }
-
-    if (billgate) following++;
-    if (elonmusk) following++;
-    if (nico) following++;
-    if (trump) following++;
-    if (conan) following++;
-    if (bts) following++;
 
     return (
         <VStack w="150px" h="110px" mt="15px" ml="20px" alignItems="flex-start">

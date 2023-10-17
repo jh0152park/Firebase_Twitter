@@ -1,7 +1,21 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Heading, Spinner, Text, VStack } from "@chakra-ui/react";
 import Influencer from "./influencer";
+import { auth, db } from "../../../firebase";
+import { Unsubscribe, collection, onSnapshot, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+    ILog,
+    ProfilePageVisited,
+    TotalFollowing,
+} from "../../../global/common";
 
 export default function FollowBar() {
+    const user = auth.currentUser;
+    const [myDB, setMyDB] = useState<ILog>();
+    const totalFollowing = useSetRecoilState(TotalFollowing);
+    const visited = useRecoilValue(ProfilePageVisited);
+
     const influencer = [
         {
             name: "Bill Gates",
@@ -20,41 +34,82 @@ export default function FollowBar() {
         },
     ];
 
-    return (
-        <VStack
-            mt="20px"
-            w="350px"
-            bgColor="#121215"
-            borderRadius="20px"
-            alignItems="flex-start"
-            spacing="0"
-        >
-            <Text fontWeight="bold" fontSize="20px" m="15px">
-                팔로우 추천
-            </Text>
+    useEffect(() => {
+        let unsubscribe: Unsubscribe | null = null;
 
-            {influencer.map((user, index) => (
-                <Influencer
-                    key={index}
-                    name={user.name}
-                    src={user.src}
-                    id={user.id}
-                />
-            ))}
-            <Box
-                w="100%"
-                h="40px"
-                mt="10px"
-                px="15px"
-                display="flex"
-                justifyContent="flex-start"
-                alignItems="center"
-                color="twitter.500"
-                _hover={{ bgColor: "#18191C", cursor: "pointer" }}
-            >
-                <Text>더 보기</Text>
-            </Box>
-            <Box h="15px"></Box>
-        </VStack>
+        async function fetchFollowing() {
+            if (user) {
+                const tweetsQuery = query(collection(db, user.uid));
+
+                unsubscribe = await onSnapshot(tweetsQuery, (snapshot) => {
+                    const log = snapshot.docs.map((doc) => {
+                        const { following, like, background_image } =
+                            doc.data();
+                        return {
+                            following,
+                            like,
+                            background_image,
+                            id: doc.id,
+                        };
+                    });
+                    setMyDB(log[0]);
+                    totalFollowing(log[0].following.length);
+                });
+            }
+        }
+        // if (!visited) setTimeout(fetchFollowing, 1500);
+        // else fetchFollowing();
+        fetchFollowing();
+        return () => {
+            unsubscribe && unsubscribe();
+        };
+    }, []);
+
+    return (
+        <>
+            {myDB ? (
+                <VStack
+                    mt="20px"
+                    w="350px"
+                    bgColor="#121215"
+                    borderRadius="20px"
+                    alignItems="flex-start"
+                    spacing="0"
+                >
+                    <Text fontWeight="bold" fontSize="20px" m="15px">
+                        팔로우 추천
+                    </Text>
+
+                    {influencer.map((user, index) => (
+                        <Influencer
+                            key={index}
+                            name={user.name}
+                            src={user.src}
+                            id={user.id}
+                            followings={myDB.following}
+                            dbId={myDB.id}
+                        />
+                    ))}
+                    <Box
+                        w="100%"
+                        h="40px"
+                        mt="10px"
+                        px="15px"
+                        display="flex"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        color="twitter.500"
+                        _hover={{ bgColor: "#18191C", cursor: "pointer" }}
+                    >
+                        <Text>더 보기</Text>
+                    </Box>
+                    <Box h="15px"></Box>
+                </VStack>
+            ) : (
+                <Center mt="50px">
+                    <Spinner />
+                </Center>
+            )}
+        </>
     );
 }

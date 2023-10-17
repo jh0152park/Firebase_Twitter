@@ -6,9 +6,14 @@ import SuggestionCards from "./feed_styles/suggestion_cards";
 import GoToTop from "../components/go_to_top";
 import { auth } from "../firebase";
 import ProfileBoard from "./profile_style/profile_board";
+import { useSetRecoilState } from "recoil";
+import { ProfilePageVisited } from "../global/common";
 
 export default function Profile() {
     const user = auth.currentUser;
+    const visited = useSetRecoilState(ProfilePageVisited);
+
+    visited(true);
     return (
         <>
             <Helmet>

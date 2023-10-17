@@ -1,7 +1,17 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 import Influencer from "../feed_styles/suggestion_style/influencer";
+import { useEffect, useState } from "react";
+import { Unsubscribe } from "firebase/auth";
+import { auth, db } from "../../firebase";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { useSetRecoilState } from "recoil";
+import { ILog, TotalFollowing } from "../../global/common";
 
 export default function Suggestion() {
+    const user = auth.currentUser;
+    const [myDB, setMyDB] = useState<ILog>();
+    const totalFollowing = useSetRecoilState(TotalFollowing);
+
     const influencer = [
         {
             name: "Team Trump (Text TRUMP to 88022)",
@@ -19,6 +29,35 @@ export default function Suggestion() {
             id: "@BTS_twt",
         },
     ];
+
+    useEffect(() => {
+        let unsubscribe: Unsubscribe | null = null;
+
+        async function fetchFollowing() {
+            if (user) {
+                const tweetsQuery = query(collection(db, user.uid));
+
+                unsubscribe = await onSnapshot(tweetsQuery, (snapshot) => {
+                    const log = snapshot.docs.map((doc) => {
+                        const { following, like, background_image } =
+                            doc.data();
+                        return {
+                            following,
+                            like,
+                            background_image,
+                            id: doc.id,
+                        };
+                    });
+                    setMyDB(log[0]);
+                    totalFollowing(log[0].following.length);
+                });
+            }
+        }
+        fetchFollowing();
+        return () => {
+            unsubscribe && unsubscribe();
+        };
+    }, []);
 
     return (
         <VStack
@@ -38,12 +77,18 @@ export default function Suggestion() {
             </Text>
 
             {influencer.map((user, index) => (
-                <Influencer
-                    key={index}
-                    name={user.name}
-                    src={user.src}
-                    id={user.id}
-                />
+                <>
+                    {myDB ? (
+                        <Influencer
+                            key={index}
+                            name={user.name}
+                            src={user.src}
+                            id={user.id}
+                            followings={myDB.following}
+                            dbId={myDB.id}
+                        />
+                    ) : null}
+                </>
             ))}
             <Box
                 w="100%"
