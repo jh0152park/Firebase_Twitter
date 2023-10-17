@@ -76,7 +76,10 @@ export default function Timeline() {
                 likedTweets(liked);
             });
         }
+
         fetchTweeet();
+        console.log("time line use effect");
+
         return () => {
             unsubscribe && unsubscribe();
         };

@@ -68,8 +68,6 @@ export default function EditPostModal({
     const [attachedFileURL, setAttachedFileURL] = useState<any>(imageURL);
     const [uploading, setUploading] = useState(false);
 
-    console.log(tweet, imageURL, postId);
-
     const MB = 1 * 1024 * 1024;
 
     function onAttachedFileClick() {
