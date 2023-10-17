@@ -13,6 +13,7 @@ export interface ITweet {
     like: number;
     view: number;
     isLiked: boolean;
+    whosLiked: string[];
 }
 
 export interface ILog {

@@ -1,6 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import Tweet from "./tweet";
 import { Unsubscribe } from "firebase/auth";
 import { useSetRecoilState } from "recoil";
@@ -13,6 +13,7 @@ import {
 } from "../../global/common";
 
 export default function MediaTimeline() {
+    const user = auth.currentUser;
     const [tweets, setTweets] = useState<ITweet[]>([]);
     const entireTweets = useSetRecoilState(EntireTweets);
     const totalTweets = useSetRecoilState(NumberOfTweets);
@@ -45,6 +46,7 @@ export default function MediaTimeline() {
                         like,
                         view,
                         isLiked,
+                        whosLiked,
                     } = doc.data();
                     return {
                         tweet,
@@ -59,6 +61,7 @@ export default function MediaTimeline() {
                         like,
                         view,
                         isLiked,
+                        whosLiked,
                     };
                 });
                 setTweets(tweets);
@@ -66,8 +69,8 @@ export default function MediaTimeline() {
                 totalTweets(tweets.length);
 
                 for (var tweet of tweets) {
-                    if (tweet.imageURL) media++;
-                    if (tweet.isLiked) liked++;
+                    if (tweet.imageURL && tweet.userId === user?.uid) media++;
+                    if (user && tweet.whosLiked.includes(user.uid)) liked++;
                 }
                 mediaTweets(media);
                 likedTweets(liked);
@@ -83,7 +86,7 @@ export default function MediaTimeline() {
         <>
             {tweets.map((tweet) => (
                 <>
-                    {tweet.imageURL ? (
+                    {tweet.imageURL && user?.uid === tweet.userId ? (
                         <Tweet key={tweet.id} {...tweet}></Tweet>
                     ) : null}
                 </>

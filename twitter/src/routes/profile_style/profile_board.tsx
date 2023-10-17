@@ -14,6 +14,8 @@ import MediaTimeline from "../timeline/medai_timeline";
 import LikedTimeline from "../timeline/liked_timeline";
 import { ComputeMyTotalTweetCount } from "../../global/util";
 import { auth } from "../../firebase";
+import OwnTimeline from "../timeline/own_timeline";
+import Media from "./media";
 
 export default function ProfileBoard() {
     const user = auth.currentUser;
@@ -25,8 +27,8 @@ export default function ProfileBoard() {
     const mediaTweets = useRecoilValue(MediaTweets);
     const likedTweets = useRecoilValue(LikedTweets);
 
-    // console.log(`mediaTweets: ${mediaTweets}`);
-    // console.log(`likedTweets: ${likedTweets}`);
+    console.log(`mediaTweets: ${mediaTweets}`);
+    console.log(`likedTweets: ${likedTweets}`);
 
     return (
         <>
@@ -36,14 +38,14 @@ export default function ProfileBoard() {
 
             {currentOption === "게시물" ? (
                 totalTweets ? (
-                    <Timeline />
+                    <OwnTimeline />
                 ) : (
                     <Suggestion />
                 )
             ) : null}
             {currentOption === "답글" ? (
                 totalTweets ? (
-                    <Timeline />
+                    <OwnTimeline />
                 ) : (
                     <Suggestion />
                 )
@@ -54,7 +56,7 @@ export default function ProfileBoard() {
                 mediaTweets ? (
                     <MediaTimeline />
                 ) : (
-                    <Suggestion />
+                    <Media />
                 )
             ) : null}
             {currentOption === "마음에 들어요" ? (
