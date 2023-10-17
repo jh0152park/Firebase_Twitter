@@ -1,6 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import Tweet from "./tweet";
 import { Unsubscribe } from "firebase/auth";
 import { useSetRecoilState } from "recoil";
@@ -18,6 +18,7 @@ export default function Timeline() {
     const totalTweets = useSetRecoilState(NumberOfTweets);
     const mediaTweets = useSetRecoilState(MediaTweets);
     const likedTweets = useSetRecoilState(LikedTweets);
+    const user = auth.currentUser;
 
     useEffect(() => {
         let unsubscribe: Unsubscribe | null = null;
@@ -45,6 +46,7 @@ export default function Timeline() {
                         like,
                         view,
                         isLiked,
+                        whosLiked,
                     } = doc.data();
                     return {
                         tweet,
@@ -59,6 +61,7 @@ export default function Timeline() {
                         like,
                         view,
                         isLiked,
+                        whosLiked,
                     };
                 });
                 setTweets(tweets);
@@ -66,8 +69,8 @@ export default function Timeline() {
                 totalTweets(tweets.length);
 
                 for (var tweet of tweets) {
-                    if (tweet.imageURL) media++;
-                    if (tweet.isLiked) liked++;
+                    if (tweet.imageURL && tweet.userId === user?.uid) media++;
+                    if (user && tweet.whosLiked.includes(user.uid)) liked++;
                 }
                 mediaTweets(media);
                 likedTweets(liked);

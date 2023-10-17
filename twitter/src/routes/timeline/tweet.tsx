@@ -37,7 +37,14 @@ export default function Tweet({
     view,
     id,
     isLiked,
+    whosLiked,
 }: ITweet) {
+    // console.log(`------------------`);
+    // console.log(`tweet: ${tweet}`);
+    // console.log(`post user: ${userId}`);
+    // console.log(`post id: ${id}`);
+    // console.log(`------------------`);
+
     const toast = useToast();
     const user = auth.currentUser;
 
@@ -110,195 +117,217 @@ export default function Tweet({
     }
 
     return (
-        <Box
-            minW="600px"
-            maxW="600px"
-            minH="110px"
-            px="20px"
-            py="15px"
-            borderBottom="1px"
-            borderLeft="1px"
-            borderRight="1px"
-            borderColor="rgba(255, 255, 255, 0.2)"
-            bgColor="rgba(0, 0, 0, 1)"
-            _hover={{
-                cursor: "pointer",
-                bgColor: more ? "rgba(0,0,0,1)" : "rgba(255, 255, 255, 0.1)",
-                transition: "background 0.1s linear",
-            }}
-            position="relative"
-        >
-            <HStack alignItems="flex-start">
-                <Box w="40px" h="40px" mr="10px">
-                    <Avatar
-                        w="40px"
-                        h="40px"
-                        name={username}
-                        src={creatorImageURL}
-                    />
-                </Box>
-                <HStack alignItems="flex-start" mb="5px">
-                    <Text fontWeight="bold">{username}</Text>
-                    <Text fontSize="14px" color="rgba(255, 255, 255, 0.4)">
-                        @{userId.slice(0, 10)} ∙ {createdDate}
-                    </Text>
-                </HStack>
-                <Center
-                    w="30px"
-                    h="30px"
-                    borderRadius="50%"
-                    top="10px"
-                    right="10px"
-                    position="absolute"
-                    color="rgba(255, 255, 255, 0.5)"
+        <>
+            {user ? (
+                <Box
+                    minW="600px"
+                    maxW="600px"
+                    minH="110px"
+                    px="20px"
+                    py="15px"
+                    borderBottom="1px"
+                    borderLeft="1px"
+                    borderRight="1px"
+                    borderColor="rgba(255, 255, 255, 0.2)"
+                    bgColor="rgba(0, 0, 0, 1)"
                     _hover={{
-                        bgColor: "rgba(28, 141, 238, 0.1)",
-                        color: "twitter.600",
+                        cursor: "pointer",
+                        bgColor: more
+                            ? "rgba(0,0,0,1)"
+                            : "rgba(255, 255, 255, 0.1)",
+                        transition: "background 0.1s linear",
                     }}
-                    onClick={() => {
-                        setMore((prev) => !prev);
-                    }}
+                    position="relative"
                 >
-                    <BsThreeDots />
-                </Center>
-            </HStack>
+                    <HStack alignItems="flex-start">
+                        <Box w="40px" h="40px" mr="10px">
+                            <Avatar
+                                w="40px"
+                                h="40px"
+                                name={username}
+                                src={creatorImageURL}
+                            />
+                        </Box>
+                        <HStack alignItems="flex-start" mb="5px">
+                            <Text fontWeight="bold">{username}</Text>
+                            <Text
+                                fontSize="14px"
+                                color="rgba(255, 255, 255, 0.4)"
+                            >
+                                @{userId.slice(0, 10)} ∙ {createdDate}
+                            </Text>
+                        </HStack>
+                        <Center
+                            w="30px"
+                            h="30px"
+                            borderRadius="50%"
+                            top="10px"
+                            right="10px"
+                            position="absolute"
+                            color="rgba(255, 255, 255, 0.5)"
+                            _hover={{
+                                bgColor: "rgba(28, 141, 238, 0.1)",
+                                color: "twitter.600",
+                            }}
+                            onClick={() => {
+                                setMore((prev) => !prev);
+                            }}
+                        >
+                            <BsThreeDots />
+                        </Center>
+                    </HStack>
 
-            <Box w="510px" ml="60px" mb="30px" mt="-10px">
-                {tweet}
-            </Box>
+                    <Box w="510px" ml="60px" mb="30px" mt="-10px">
+                        {tweet}
+                    </Box>
 
-            {more ? (
-                <Fade in={more}>
-                    <VStack
-                        w="100px"
-                        h="70px"
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        border="1px"
-                        borderRadius="20px"
-                        bgColor="rgba(0, 0, 0, 0.9)"
-                        borderColor="rgba(255, 255, 255, 0.2)"
-                        position="absolute"
-                        top="10px"
-                        right="40px"
-                        fontSize="15px"
-                        fontWeight="bold"
-                        spacing="0"
-                        boxShadow="0px 0px 5px rgba(255, 255, 255, 0.5)"
+                    {more ? (
+                        <Fade in={more}>
+                            <VStack
+                                w="100px"
+                                h="70px"
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                                border="1px"
+                                borderRadius="20px"
+                                bgColor="rgba(0, 0, 0, 0.9)"
+                                borderColor="rgba(255, 255, 255, 0.2)"
+                                position="absolute"
+                                top="10px"
+                                right="40px"
+                                fontSize="15px"
+                                fontWeight="bold"
+                                spacing="0"
+                                boxShadow="0px 0px 5px rgba(255, 255, 255, 0.5)"
+                            >
+                                <Center
+                                    w="70px"
+                                    py="5px"
+                                    borderRadius="20px"
+                                    color="twitter.500"
+                                    _hover={{
+                                        cursor: "pointer",
+                                        bgColor: "twitter.500",
+                                        color: "whitesmoke",
+                                        transition: "background 0.2s linear",
+                                    }}
+                                    onClick={onEditButtonClick}
+                                >
+                                    수정하기
+                                </Center>
+                                <Center
+                                    w="70px"
+                                    py="5px"
+                                    borderRadius="20px"
+                                    color="rgb(231,0,104)"
+                                    _hover={{
+                                        cursor: "pointer",
+                                        bgColor: "rgb(231,0,104)",
+                                        color: "whitesmoke",
+                                        transition: "background 0.2s linear",
+                                    }}
+                                    onClick={onDeleteButtonClick}
+                                >
+                                    삭제하기
+                                </Center>
+                            </VStack>
+                        </Fade>
+                    ) : null}
+
+                    {imageURL ? (
+                        <Box
+                            mt="40px"
+                            mb="10px"
+                            ml="60px"
+                            minW="510px"
+                            maxW="510px"
+                        >
+                            <Image
+                                objectFit="cover"
+                                src={imageURL}
+                                borderRadius="20px"
+                            />
+                        </Box>
+                    ) : null}
+
+                    <HStack
+                        w="510px"
+                        h="30px"
+                        ml="60px"
+                        position="relative"
+                        bottom="-10px"
+                        justifyContent="space-between"
                     >
-                        <Center
-                            w="70px"
-                            py="5px"
-                            borderRadius="20px"
-                            color="twitter.500"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "twitter.500",
-                                color: "whitesmoke",
-                                transition: "background 0.2s linear",
-                            }}
-                            onClick={onEditButtonClick}
-                        >
-                            수정하기
-                        </Center>
-                        <Center
-                            w="70px"
-                            py="5px"
-                            borderRadius="20px"
-                            color="rgb(231,0,104)"
-                            _hover={{
-                                cursor: "pointer",
-                                bgColor: "rgb(231,0,104)",
-                                color: "whitesmoke",
-                                transition: "background 0.2s linear",
-                            }}
-                            onClick={onDeleteButtonClick}
-                        >
-                            삭제하기
-                        </Center>
-                    </VStack>
-                </Fade>
-            ) : null}
+                        <InteractButton
+                            icon={FaRegComment}
+                            number={comment}
+                            r={28}
+                            g={134}
+                            b={236}
+                        />
+                        <InteractButton
+                            icon={HiOutlineArrowPathRoundedSquare}
+                            number={retweet}
+                            r={37}
+                            g={240}
+                            b={108}
+                        />
+                        <InteractButton
+                            icon={AiOutlineHeart}
+                            number={like}
+                            r={231}
+                            g={0}
+                            b={104}
+                            click={true}
+                            id={id}
+                            // isLiked={isLiked}
+                            isLiked={whosLiked.includes(user?.uid)}
+                            whosLiked={whosLiked}
+                            userId={userId}
+                        />
+                        <InteractButton
+                            icon={BiBarChart}
+                            number={view}
+                            r={28}
+                            g={134}
+                            b={236}
+                        />
+                        <InteractButton
+                            icon={BsUpload}
+                            number={""}
+                            r={255}
+                            g={255}
+                            b={255}
+                        />
+                    </HStack>
 
-            {imageURL ? (
-                <Box mt="40px" mb="10px" ml="60px" minW="510px" maxW="510px">
-                    <Image
-                        objectFit="cover"
-                        src={imageURL}
-                        borderRadius="20px"
+                    {deleteTweet ? (
+                        <Center
+                            position="absolute"
+                            top="0"
+                            bottom="0"
+                            left="0"
+                            right="0"
+                            m="auto"
+                        >
+                            <Spinner
+                                size="xl"
+                                color="twitter.500"
+                                thickness="3px"
+                            />
+                        </Center>
+                    ) : null}
+
+                    <EditPostModal
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        tweet={tweet}
+                        imageURL={imageURL}
+                        postId={id}
                     />
                 </Box>
             ) : null}
-
-            <HStack
-                w="510px"
-                h="30px"
-                ml="60px"
-                position="relative"
-                bottom="-10px"
-                justifyContent="space-between"
-            >
-                <InteractButton
-                    icon={FaRegComment}
-                    number={comment}
-                    r={28}
-                    g={134}
-                    b={236}
-                />
-                <InteractButton
-                    icon={HiOutlineArrowPathRoundedSquare}
-                    number={retweet}
-                    r={37}
-                    g={240}
-                    b={108}
-                />
-                <InteractButton
-                    icon={AiOutlineHeart}
-                    number={like}
-                    r={231}
-                    g={0}
-                    b={104}
-                    click={true}
-                    id={id}
-                    isLiked={isLiked}
-                />
-                <InteractButton
-                    icon={BiBarChart}
-                    number={view}
-                    r={28}
-                    g={134}
-                    b={236}
-                />
-                <InteractButton
-                    icon={BsUpload}
-                    number={""}
-                    r={255}
-                    g={255}
-                    b={255}
-                />
-            </HStack>
-
-            {deleteTweet ? (
-                <Center
-                    position="absolute"
-                    top="0"
-                    bottom="0"
-                    left="0"
-                    right="0"
-                    m="auto"
-                >
-                    <Spinner size="xl" color="twitter.500" thickness="3px" />
-                </Center>
-            ) : null}
-
-            <EditPostModal
-                isOpen={isOpen}
-                onClose={onClose}
-                tweet={tweet}
-                imageURL={imageURL}
-                postId={id}
-            />
-        </Box>
+        </>
     );
 }

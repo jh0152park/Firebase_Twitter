@@ -85,6 +85,7 @@ export default function CreatePostModal({ isOpen, onClose }: ModalProps) {
                 like: like,
                 retweet: retweet,
                 isLiked: false,
+                whosLiked: [],
             });
 
             if (attachedFile) {

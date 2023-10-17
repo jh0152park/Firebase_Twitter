@@ -12,7 +12,7 @@ import {
     NumberOfTweets,
 } from "../../global/common";
 
-export default function LikedTimeline() {
+export default function OwnTimeline() {
     const user = auth.currentUser;
     const [tweets, setTweets] = useState<ITweet[]>([]);
     const entireTweets = useSetRecoilState(EntireTweets);
@@ -86,7 +86,7 @@ export default function LikedTimeline() {
         <>
             {tweets.map((tweet) => (
                 <>
-                    {user && tweet.whosLiked.includes(user?.uid) ? (
+                    {user?.uid === tweet.userId ? (
                         <Tweet key={tweet.id} {...tweet}></Tweet>
                     ) : null}
                 </>
