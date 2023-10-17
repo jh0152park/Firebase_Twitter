@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
     ILog,
+    MyDBID,
+    ProfileBGImage,
     ProfilePageVisited,
     TotalFollowing,
 } from "../../../global/common";
@@ -14,6 +16,8 @@ export default function FollowBar() {
     const user = auth.currentUser;
     const [myDB, setMyDB] = useState<ILog>();
     const totalFollowing = useSetRecoilState(TotalFollowing);
+    const profileBackgroundImage = useSetRecoilState(ProfileBGImage);
+    const DBID = useSetRecoilState(MyDBID);
     const visited = useRecoilValue(ProfilePageVisited);
 
     const influencer = [
@@ -54,6 +58,8 @@ export default function FollowBar() {
                     });
                     setMyDB(log[0]);
                     totalFollowing(log[0].following.length);
+                    profileBackgroundImage(log[0].background_image);
+                    DBID(log[0].id);
                 });
             }
         }

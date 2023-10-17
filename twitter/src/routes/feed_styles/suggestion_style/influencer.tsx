@@ -33,7 +33,7 @@ export default function Influencer({
     followings,
     dbId,
 }: IProfile) {
-    console.log(`input following list: ${followings}`);
+    // console.log(`input following list: ${followings}`);
 
     const user = auth.currentUser;
     const [following, setFollowing] = useState<boolean>(

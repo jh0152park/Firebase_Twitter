@@ -5,12 +5,19 @@ import { Unsubscribe } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { useSetRecoilState } from "recoil";
-import { ILog, TotalFollowing } from "../../global/common";
+import {
+    ILog,
+    MyDBID,
+    ProfileBGImage,
+    TotalFollowing,
+} from "../../global/common";
 
 export default function Suggestion() {
     const user = auth.currentUser;
     const [myDB, setMyDB] = useState<ILog>();
     const totalFollowing = useSetRecoilState(TotalFollowing);
+    const DBID = useSetRecoilState(MyDBID);
+    const profileBackgroundImage = useSetRecoilState(ProfileBGImage);
 
     const influencer = [
         {
@@ -50,6 +57,8 @@ export default function Suggestion() {
                     });
                     setMyDB(log[0]);
                     totalFollowing(log[0].following.length);
+                    profileBackgroundImage(log[0].background_image);
+                    DBID(log[0].id);
                 });
             }
         }
