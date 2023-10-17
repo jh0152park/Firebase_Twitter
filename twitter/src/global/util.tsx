@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { EntireTweets } from "./common";
-import { db } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 
 const MONTH: any = {
     Jan: 1,
@@ -27,10 +27,6 @@ export function ComputeMyTotalTweetCount(uid: number | string) {
     const entireTweets = useRecoilValue(EntireTweets);
     for (var tweet of entireTweets) {
         if (tweet.userId === uid) cnt++;
-        // console.log(tweet.tweet);
-        // console.log(tweet.userId);
-        // console.log(uid);
-        // console.log("---------------------");
     }
     return cnt;
 }

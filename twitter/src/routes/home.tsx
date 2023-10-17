@@ -83,6 +83,7 @@ export default function Home() {
             await signInWithPopup(auth, provider);
 
             if (auth.currentUser) {
+                console.log("Github login gogo");
                 CreateUserField(auth.currentUser.uid);
             }
 

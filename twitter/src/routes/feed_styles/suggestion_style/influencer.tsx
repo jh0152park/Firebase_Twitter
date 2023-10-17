@@ -14,16 +14,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import {
-    BTSFollow,
-    BillGatesFollow,
-    ConanFollow,
-    ElonMuskFollow,
-    NicoFollow,
-    TrumpFollow,
-} from "../../../global/common";
-import { type } from "os";
+
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
 
