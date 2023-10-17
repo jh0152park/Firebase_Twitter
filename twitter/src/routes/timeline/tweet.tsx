@@ -150,7 +150,15 @@ export default function Tweet({
                         </Box>
                         <HStack alignItems="flex-start" mb="5px">
                             <Text fontWeight="bold">{username}</Text>
+                            <Image
+                                ml="-4px"
+                                mt="-2px"
+                                boxSize="20px"
+                                objectFit="cover"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/1024px-Twitter_Verified_Badge.svg.png"
+                            />
                             <Text
+                                ml="-3px"
                                 fontSize="14px"
                                 color="rgba(255, 255, 255, 0.4)"
                             >
