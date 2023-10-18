@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 import TrendItem from "./trend_item";
 
 export default function TrendBar() {

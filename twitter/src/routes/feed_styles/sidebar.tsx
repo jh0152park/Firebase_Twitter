@@ -14,8 +14,6 @@ import PostButton from "./sidebar_style/post_button";
 import User from "./sidebar_style/user_button";
 
 export default function Sidebar() {
-    const navigate = useNavigate();
-
     return (
         <VStack alignItems={"flex-start"} spacing="0">
             <Logo />
