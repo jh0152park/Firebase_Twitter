@@ -6,6 +6,7 @@ import FollowBar from "./suggestion_style/follow_suggestion";
 import { Box } from "@chakra-ui/react";
 import { useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
+import SideFooter from "./suggestion_style/side_footer";
 
 export default function SuggestionCards() {
     const { scrollY } = useScroll();
@@ -31,6 +32,7 @@ export default function SuggestionCards() {
             >
                 <TrendBar />
                 <FollowBar />
+                <SideFooter />
             </Box>
         </Box>
     );
