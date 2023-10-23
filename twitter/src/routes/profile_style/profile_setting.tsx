@@ -1,6 +1,8 @@
 import { Box, Center, useDisclosure } from "@chakra-ui/react";
 import ProfileSettingModal from "./profile_setting_modal";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function ProfileSetting() {
     const { isOpen, onOpen, onClose } = useDisclosure();
 

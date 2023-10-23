@@ -12,6 +12,8 @@ import {
     NumberOfTweets,
 } from "../../global/common";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function OwnTimeline() {
     const user = auth.currentUser;
     const [tweets, setTweets] = useState<ITweet[]>([]);

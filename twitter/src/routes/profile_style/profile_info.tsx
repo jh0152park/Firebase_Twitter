@@ -14,6 +14,8 @@ import { TotalFollowing } from "../../global/common";
 import { FaPencil } from "react-icons/fa6";
 import ProfileNameEditModal from "./profile_name_edit_modal";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function ProfileInfo() {
     const user = auth.currentUser;
     let year = 2023;

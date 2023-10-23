@@ -4,6 +4,8 @@ import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ComputeMyTotalTweetCount } from "../../global/util";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function Header() {
     const user = auth.currentUser;
     const navigate = useNavigate();

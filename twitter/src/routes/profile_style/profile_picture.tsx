@@ -2,6 +2,8 @@ import { Avatar, Box, useDisclosure } from "@chakra-ui/react";
 import { auth } from "../../firebase";
 import ProfileSettingModal from "./profile_setting_modal";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function ProfilePicture() {
     const user = auth.currentUser;
     const { isOpen, onOpen, onClose } = useDisclosure();

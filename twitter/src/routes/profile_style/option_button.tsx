@@ -2,6 +2,8 @@ import { Box, Text, VStack } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { ProfileOptionButton } from "../../global/common";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function OptionButton({
     option,
     width,

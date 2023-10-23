@@ -31,6 +31,8 @@ interface IModal {
     onClose: () => void;
 }
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function ProfileSettingModal({ isOpen, onClose }: IModal) {
     const user = auth.currentUser;
     const toast = useToast();

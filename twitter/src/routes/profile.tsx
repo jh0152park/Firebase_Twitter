@@ -9,6 +9,8 @@ import ProfileBoard from "./profile_style/profile_board";
 import { useSetRecoilState } from "recoil";
 import { ProfilePageVisited } from "../global/common";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function Profile() {
     const user = auth.currentUser;
     const visited = useSetRecoilState(ProfilePageVisited);
