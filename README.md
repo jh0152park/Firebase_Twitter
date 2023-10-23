@@ -31,6 +31,9 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/fc669d3a-943b-46
 ## Following
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b84b866b-76a4-44f3-993f-d7fc43a7c263
 
+## Post
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/290b4b71-937f-44b9-98b1-08c97f1067fe
+
 
 
 
