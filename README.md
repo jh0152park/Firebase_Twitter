@@ -43,6 +43,8 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b3d3b75c-2383-49
 ## Can't edit, delete not own post
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/724a5926-9c68-4d76-8b71-71e6118a331a
 
+## My posts at profile page
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/634dae79-26dc-448f-a3b8-c2dcbe156e62
 
 
 
