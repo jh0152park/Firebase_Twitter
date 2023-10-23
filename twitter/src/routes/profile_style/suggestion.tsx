@@ -12,6 +12,8 @@ import {
     TotalFollowing,
 } from "../../global/common";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function Suggestion() {
     const user = auth.currentUser;
     const [myDB, setMyDB] = useState<ILog>();

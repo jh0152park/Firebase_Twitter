@@ -1,5 +1,7 @@
 import { Box, Center, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function Highlight() {
     const toast = useToast();
 

@@ -10,12 +10,14 @@ import {
 } from "../../global/common";
 import Suggestion from "./suggestion";
 import Highlight from "./highlite";
-import MediaTimeline from "../timeline/medai_timeline";
+import MediaTimeline from "../timeline/media_timeline";
 import LikedTimeline from "../timeline/liked_timeline";
 import { ComputeMyTotalTweetCount } from "../../global/util";
 import { auth } from "../../firebase";
 import OwnTimeline from "../timeline/own_timeline";
 import Media from "./media";
+
+// 2023.10.23 twitter challenge for user profile
 
 export default function ProfileBoard() {
     const user = auth.currentUser;

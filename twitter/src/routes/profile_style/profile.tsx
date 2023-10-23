@@ -5,6 +5,8 @@ import ProfileSetting from "./profile_setting";
 import ProfileInfo from "./profile_info";
 import Option from "./option";
 
+// 2023.10.23 twitter challenge for user profile
+
 export default function Profile() {
     return (
         <Box
