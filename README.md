@@ -37,6 +37,9 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/290b4b71-937f-44
 ## Delete Post
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/8e1323d4-a2e3-49df-a190-f9150e23b819
 
+## Edit Post
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b3d3b75c-2383-4956-a2c8-20dcfde22576
+
 
 
 
