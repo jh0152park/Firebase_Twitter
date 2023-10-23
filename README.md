@@ -22,3 +22,6 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/26674f0d-e2ab-4b
 ## Login
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/80413de6-7f8d-4c58-816d-6c97ac13ff17
 
+## Logout
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/86ec9452-2209-4c34-a68f-9b75fd7e5c5d
+
