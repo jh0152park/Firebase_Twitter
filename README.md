@@ -19,3 +19,6 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/62fc966a-7081-4d
 ## Create Account with Google (Login with Google)
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/26674f0d-e2ab-4be5-a42e-667928ba0adb
 
+## Login
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/80413de6-7f8d-4c58-816d-6c97ac13ff17
+
