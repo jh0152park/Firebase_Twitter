@@ -55,6 +55,8 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d43656de-785b-41
 ## Media posts at profile page
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d139b2c8-ef07-4405-9fc1-d169ed82848c
 
+## Profile Photo Change
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/2e72eeff-c325-4a34-a4b8-8c027f731fd5
 
 
 
