@@ -40,6 +40,11 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/8e1323d4-a2e3-49
 ## Edit Post
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b3d3b75c-2383-4956-a2c8-20dcfde22576
 
+## Can't edit, delete not own post
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/724a5926-9c68-4d76-8b71-71e6118a331a
+
+
+
 
 
 
