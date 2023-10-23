@@ -13,3 +13,6 @@ And it's combine Firebase and ReactJS, also using chakraui for css.
 ## Create Account
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/3844aecb-aad5-482b-9ff7-59923853fde3
 
+## Create Account with Github
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/62fc966a-7081-4dc5-b16b-b1d744013e33
+
