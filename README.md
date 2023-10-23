@@ -52,6 +52,9 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b095717c-f36c-45
 ## Liked posts at profile page
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d43656de-785b-413c-b001-5ec39e070bd9
 
+## Media posts at profile page
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d139b2c8-ef07-4405-9fc1-d169ed82848c
+
 
 
 
