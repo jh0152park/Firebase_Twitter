@@ -5,7 +5,10 @@ Basically my goal is try to make as same as possible with X(twitter).
 
 And it's combine Firebase and ReactJS, also using chakraui for css.
 
-# Work Result
+# Work Results
+
+## Entire Video
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/0e4886a1-f5bf-4836-8acd-2d6884c8aec3
 
 ## Start Screen
 ![image](https://github.com/jh0152park/Firebase_Twitter/assets/118165975/82ff6364-002c-49d5-bfd0-5a511bf1cb99)
@@ -60,8 +63,3 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/2e72eeff-c325-4a
 
 ## User name change
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/6e5f6d16-5d95-4a52-bb26-b197a096a17f
-
-
-
-
-
