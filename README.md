@@ -49,6 +49,9 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/634dae79-26dc-44
 ## Highlight at profile page
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/b095717c-f36c-4504-a45b-42436157028e
 
+## Liked posts at profile page
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d43656de-785b-413c-b001-5ec39e070bd9
+
 
 
 
