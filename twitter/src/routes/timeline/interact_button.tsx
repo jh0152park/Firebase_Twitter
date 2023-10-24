@@ -51,6 +51,7 @@ export default function InteractButton({
                         whosLiked: whosLiked.filter(
                             (u) => u !== currentUser.uid
                         ),
+                        like: number - 1,
                     });
                 }
             } else {
@@ -60,6 +61,7 @@ export default function InteractButton({
                     await updateDoc(postRef, {
                         isLiked: true,
                         whosLiked: [...whosLiked, currentUser.uid],
+                        like: number + 1,
                     });
                 }
             }
@@ -96,9 +98,10 @@ export default function InteractButton({
                 <Icon as={like ? FaHeart : icon} width="17px" height="17px" />
             </Center>
             <Text ml="5px">
-                {like
+                {/* {like
                     ? (number + 1).toLocaleString("ko-KR")
-                    : number.toLocaleString("ko-KR")}
+                    : number.toLocaleString("ko-KR")} */}
+                {number.toLocaleString("ko-KR")}
             </Text>
         </HStack>
     );
