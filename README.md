@@ -7,6 +7,7 @@ And it's combine Firebase and ReactJS, also using chakraui for css.
 
 # Bug Fix History
 - user profile re render immediately at left bottom of timeline screen  when after change user name.
+- added `like❤️` count realtime dependency to each user.
 
 
 # Work Results
