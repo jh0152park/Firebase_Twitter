@@ -6,7 +6,7 @@ Basically my goal is try to make as same as possible with X(twitter).
 And it's combine Firebase and ReactJS, also using chakraui for css.
 
 # Bug Fix History
-- user profile re render immediately at left bottom of timeline screen  when after edit user name.
+- user profile re render immediately at left bottom of timeline screen  when after change user name.
 
 
 # Work Results
