@@ -9,8 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { auth } from "../../../firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { EditName } from "../../../global/common";
 
 export default function User() {
     const user = auth.currentUser;
@@ -18,6 +20,8 @@ export default function User() {
     const toast = useToast();
     const navigate = useNavigate();
     const [more, setMore] = useState(false);
+    const editName = useRecoilValue(EditName);
+    const [rerender, setRerender] = useState(editName);
 
     function signout() {
         if (more) {
@@ -34,6 +38,10 @@ export default function User() {
             }
         }
     }
+
+    useEffect(() => {
+        setRerender(editName);
+    }, [editName]);
 
     return (
         <>

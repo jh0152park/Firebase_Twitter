@@ -95,3 +95,8 @@ export const MyDBID = atom<string>({
     key: "myDBID",
     default: "",
 });
+
+export const EditName = atom<boolean>({
+    key: "editname",
+    default: false,
+});
