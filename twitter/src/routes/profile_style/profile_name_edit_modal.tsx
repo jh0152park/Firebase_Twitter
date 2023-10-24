@@ -18,8 +18,8 @@ import { auth, db } from "../../firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
-import { useRecoilValue } from "recoil";
-import { EntireTweets } from "../../global/common";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { EditName, EntireTweets } from "../../global/common";
 import { doc, updateDoc } from "firebase/firestore";
 
 interface IInput {
@@ -42,6 +42,7 @@ export default function ProfileNameEditModal({
     const [username, setUsername] = useState<string>(name);
     const [update, setUpdate] = useState<boolean>(false);
     const entireTweets = useRecoilValue(EntireTweets);
+    const editName = useSetRecoilState(EditName);
 
     function onModalClose() {
         onClose();
@@ -49,6 +50,7 @@ export default function ProfileNameEditModal({
     }
 
     async function onNameChageSubmit() {
+        editName(false);
         if (!username) {
             toast({
                 status: "error",
@@ -56,6 +58,7 @@ export default function ProfileNameEditModal({
                 description:
                     "Username is required, Have to enter username what you want",
             });
+
             return;
         } else if (username === name) {
             onModalClose();
@@ -80,7 +83,7 @@ export default function ProfileNameEditModal({
                         });
                     }
                 }
-
+                editName(true);
                 navigate("/feed");
                 toast({
                     status: "success",
@@ -96,6 +99,7 @@ export default function ProfileNameEditModal({
         } else {
             onModalClose();
         }
+        editName(false);
     }
 
     return (
