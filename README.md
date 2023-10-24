@@ -62,4 +62,6 @@ https://github.com/jh0152park/Firebase_Twitter/assets/118165975/d139b2c8-ef07-44
 https://github.com/jh0152park/Firebase_Twitter/assets/118165975/2e72eeff-c325-4a34-a4b8-8c027f731fd5
 
 ## User name change
-https://github.com/jh0152park/Firebase_Twitter/assets/118165975/6e5f6d16-5d95-4a52-bb26-b197a096a17f
+https://github.com/jh0152park/Firebase_Twitter/assets/118165975/8c3153a0-c2fd-4da4-9b29-27800db4c19b
+
+
