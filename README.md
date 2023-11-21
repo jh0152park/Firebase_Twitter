@@ -10,6 +10,11 @@ And it's combine Firebase and ReactJS, also using chakraui for css.
 - added `like❤️` count realtime dependency to each user.
 
 
+# [Nomad Coders Twitter Clone Coding Contest 1기, 1등 (Click here)](https://nomadcoders.co/community/thread/8618?utm_source=Nomad+Academy&utm_campaign=b307da996c-EMAIL_CAMPAIGN_2023_11_17&utm_medium=email&utm_term=0_4313d957c9-b307da996c-357506203&mc_cid=b307da996c&mc_eid=04a6727976)
+![image](https://github.com/jh0152park/Firebase_Twitter/assets/118165975/04474038-8bfd-455b-a2ca-af3ad03c5d9d)
+
+
+
 # Work Results
 
 ## Entire Video
